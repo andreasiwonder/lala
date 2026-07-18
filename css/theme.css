@@ -1,0 +1,164 @@
+/* ==========================================================================
+   theme.css — conditions-reactive theming
+   --------------------------------------------------------------------------
+   The page background shifts with the actual weather and time of day. Cards do
+   NOT: chart marks are validated against exactly two card surfaces (light
+   #fcfcfb / dark #1a1a19), so every theme state declares which of the two it
+   uses via [data-mode]. Never introduce a third card surface without re-running
+   scripts/validate_palette.js against it.
+   ========================================================================== */
+
+:root {
+  /* --- Card surfaces & ink (stable; the validated substrate) --------------- */
+  --card:            #fcfcfb;
+  --card-2:          #f4f4f1;
+  --ink:             #0b0b0b;
+  --ink-2:           #52514e;
+  --ink-muted:       #898781;
+  --grid:            #e1e0d9;
+  --axis:            #c3c2b7;
+  --hairline:        rgba(11, 11, 11, 0.10);
+  --shadow:          0 1px 2px rgba(11,11,11,.06), 0 8px 24px rgba(11,11,11,.08);
+
+  /* --- Series (validated: CVD ΔE 24.7 light / 26.8 dark) ------------------- */
+  --series-wind:     #2a78d6;   /* blue   — mean wind  */
+  --series-gust:     #eb6834;   /* orange — gusts      */
+  --seq-100:         #cde2fb;
+  --seq-250:         #86b6ef;
+  --seq-400:         #3987e5;
+  --seq-550:         #1c5cab;
+  --seq-700:         #0d366b;
+
+  /* --- Status (fixed, never themed; always paired with icon + label) ------- */
+  --good:            #0ca30c;
+  --warning:         #fab219;
+  --serious:         #ec835a;
+  --critical:        #d03b3b;
+
+  /* --- Sky (overridden per theme state below) ----------------------------- */
+  --sky-1:           #8ec5f0;
+  --sky-2:           #cfe6f7;
+  --sky-3:           #eef5fa;
+  --sky-ink:         #0b1a2b;
+  --sky-ink-2:       rgba(11, 26, 43, 0.66);
+  --sky-glass:       rgba(255, 255, 255, 0.55);
+  --sky-glass-line:  rgba(255, 255, 255, 0.75);
+  --accent:          #2a78d6;
+
+  --radius:          14px;
+  --radius-lg:       20px;
+  --font: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* --- Dark card substrate: used by the night & storm states ---------------- */
+[data-mode="dark"] {
+  --card:            #1a1a19;
+  --card-2:          #222221;
+  --ink:             #ffffff;
+  --ink-2:           #c3c2b7;
+  --ink-muted:       #898781;
+  --grid:            #2c2c2a;
+  --axis:            #383835;
+  --hairline:        rgba(255, 255, 255, 0.10);
+  --shadow:          0 1px 2px rgba(0,0,0,.5), 0 8px 24px rgba(0,0,0,.45);
+
+  --series-wind:     #3987e5;
+  --series-gust:     #d95926;
+  --seq-100:         #0d366b;
+  --seq-250:         #1c5cab;
+  --seq-400:         #3987e5;
+  --seq-550:         #86b6ef;
+  --seq-700:         #cde2fb;
+}
+
+/* ==========================================================================
+   Theme states — chosen in js/theme.js from weather code + sun position
+   ========================================================================== */
+
+/* Dawn / dusk: low warm sun */
+[data-theme="dawn"] {
+  --sky-1: #f6a35c;  --sky-2: #f5c78f;  --sky-3: #dce7f0;
+  --sky-ink: #3a1f0c;  --sky-ink-2: rgba(58, 31, 12, .68);
+  --accent: #eb6834;
+}
+
+/* Clear: the good day */
+[data-theme="clear"] {
+  --sky-1: #4a9fe0;  --sky-2: #93cbf0;  --sky-3: #e8f4fb;
+  --sky-ink: #062138;  --sky-ink-2: rgba(6, 33, 56, .66);
+  --accent: #1c5cab;
+}
+
+/* Overcast: the Hamburg default */
+[data-theme="overcast"] {
+  --sky-1: #9aa5ad;  --sky-2: #c2cad0;  --sky-3: #e8ebee;
+  --sky-ink: #1b2227;  --sky-ink-2: rgba(27, 34, 39, .66);
+  --accent: #52514e;
+}
+
+/* Rain */
+[data-theme="rain"] {
+  --sky-1: #5d7185;  --sky-2: #8fa3b5;  --sky-3: #d5dee5;
+  --sky-ink: #101a22;  --sky-ink-2: rgba(16, 26, 34, .68);
+  --accent: #1c5cab;
+}
+
+/* Storm: dark substrate */
+[data-theme="storm"] {
+  --sky-1: #1f262e;  --sky-2: #38444f;  --sky-3: #55636f;
+  --sky-ink: #f2f5f7;  --sky-ink-2: rgba(242, 245, 247, .72);
+  --sky-glass: rgba(12, 16, 20, 0.55);
+  --sky-glass-line: rgba(255, 255, 255, 0.16);
+  --accent: #fab219;
+}
+
+/* Night: dark substrate */
+[data-theme="night"] {
+  --sky-1: #0a1626;  --sky-2: #16283f;  --sky-3: #26405c;
+  --sky-ink: #eaf1f8;  --sky-ink-2: rgba(234, 241, 248, .70);
+  --sky-glass: rgba(8, 14, 24, 0.55);
+  --sky-glass-line: rgba(255, 255, 255, 0.14);
+  --accent: #86b6ef;
+}
+
+/* ==========================================================================
+   Background — the "alive" layer
+   ========================================================================== */
+
+body {
+  background: var(--sky-3);
+  color: var(--sky-ink);
+  font-family: var(--font);
+  transition: background-color .8s ease, color .8s ease;
+}
+
+.sky {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(120% 80% at 50% -10%, var(--sky-1) 0%, transparent 62%),
+    linear-gradient(180deg, var(--sky-2) 0%, var(--sky-3) 55%, var(--sky-3) 100%);
+  transition: background 1.2s ease;
+}
+
+/* A slow drift so the page reads as live rather than static. */
+.sky::after {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(38% 26% at 22% 28%, rgba(255,255,255,.30) 0%, transparent 70%),
+    radial-gradient(32% 22% at 74% 18%, rgba(255,255,255,.22) 0%, transparent 70%);
+  animation: drift 90s linear infinite alternate;
+}
+
+@keyframes drift {
+  from { transform: translate3d(-3%, 0, 0) scale(1); }
+  to   { transform: translate3d(3%, 2%, 0) scale(1.08); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sky::after { animation: none; }
+  body, .sky, .card { transition: none; }
+}

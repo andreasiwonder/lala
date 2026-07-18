@@ -1,0 +1,235 @@
+/* ==========================================================================
+   layout.css — page structure, hero, tiles, cards
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; min-height: 100vh; line-height: 1.5; }
+
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: clamp(16px, 3vw, 32px);
+  padding-bottom: 64px;
+}
+
+/* --- Skip link ----------------------------------------------------------- */
+.skip {
+  position: absolute; left: -9999px;
+  background: var(--card); color: var(--ink);
+  padding: 10px 16px; border-radius: 8px; z-index: 100;
+}
+.skip:focus { left: 16px; top: 16px; }
+
+/* --- Header -------------------------------------------------------------- */
+.masthead {
+  display: flex; flex-wrap: wrap; gap: 8px 16px;
+  align-items: baseline; justify-content: space-between;
+  margin-bottom: clamp(20px, 4vw, 36px);
+}
+.masthead h1 {
+  font-size: clamp(19px, 2.4vw, 24px);
+  font-weight: 650; letter-spacing: -0.02em; margin: 0;
+}
+.masthead .sub { color: var(--sky-ink-2); font-size: 14px; margin: 2px 0 0; }
+.masthead time { color: var(--sky-ink-2); font-size: 14px; font-variant-numeric: tabular-nums; }
+
+/* ==========================================================================
+   Hero — current conditions. Sits directly on the sky, so it uses the glass
+   treatment and sky ink (NOT card ink).
+   ========================================================================== */
+
+.hero {
+  background: var(--sky-glass);
+  border: 1px solid var(--sky-glass-line);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  padding: clamp(20px, 3.5vw, 34px);
+  margin-bottom: 20px;
+  transition: background .8s ease, border-color .8s ease;
+}
+
+.hero-top {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: clamp(16px, 3vw, 40px);
+  align-items: center;
+}
+
+.wind-figure { display: flex; align-items: baseline; gap: 10px; }
+.wind-figure .value {
+  font-size: clamp(64px, 15vw, 132px);
+  font-weight: 300;
+  line-height: .85;
+  letter-spacing: -0.05em;
+  font-variant-numeric: lining-nums;
+}
+.wind-figure .unit {
+  font-size: clamp(18px, 3vw, 26px);
+  font-weight: 500;
+  color: var(--sky-ink-2);
+}
+.wind-meta {
+  margin-top: 12px;
+  font-size: clamp(14px, 1.9vw, 16px);
+  color: var(--sky-ink-2);
+  display: flex; flex-wrap: wrap; gap: 6px 18px;
+}
+.wind-meta b { font-weight: 600; color: var(--sky-ink); font-variant-numeric: tabular-nums; }
+
+/* Compass */
+.compass { width: clamp(104px, 20vw, 148px); height: clamp(104px, 20vw, 148px); flex: none; }
+.compass .ring   { fill: none; stroke: var(--sky-ink); opacity: .18; stroke-width: 1.5; }
+.compass .tick   { stroke: var(--sky-ink); opacity: .3; stroke-width: 1.5; }
+.compass .card-l { fill: var(--sky-ink); opacity: .55; font-size: 11px; font-weight: 600; text-anchor: middle; }
+/* No transform-origin here: the rotate() attribute set in main.js already
+   carries its own centre — `rotate(deg 50 50)`. Adding transform-origin makes
+   the browser apply that offset a SECOND time, rotating the arrow about the
+   viewBox corner and flinging it off-canvas. */
+.compass .arrow  { fill: var(--accent); transition: transform .9s cubic-bezier(.22,1,.36,1); }
+.compass .dirtext { fill: var(--sky-ink); font-size: 15px; font-weight: 650; text-anchor: middle; }
+
+/* --- Verdict badge — status colour ALWAYS with icon + text ---------------- */
+.verdict {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-top: 22px; padding: 10px 16px 10px 12px;
+  border-radius: 999px;
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+.verdict .dot { width: 12px; height: 12px; border-radius: 50%; flex: none; background: var(--verdict-color, var(--good)); }
+.verdict .icon { width: 18px; height: 18px; flex: none; color: var(--verdict-color, var(--good)); }
+.verdict .label { font-weight: 650; font-size: 15px; }
+.verdict .detail { color: var(--ink-2); font-size: 14px; }
+
+.hero-warnings { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.warn {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: 14px; color: var(--ink); background: var(--card);
+  border: 1px solid var(--hairline); border-left: 3px solid var(--warn-color, var(--warning));
+  border-radius: 8px; padding: 8px 12px; box-shadow: var(--shadow);
+}
+.warn svg { width: 16px; height: 16px; flex: none; margin-top: 2px; color: var(--warn-color, var(--warning)); }
+
+/* --- Secondary stat strip ------------------------------------------------ */
+.strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+  gap: 1px;
+  margin-top: 24px;
+  border-top: 1px solid var(--sky-glass-line);
+  padding-top: 18px;
+}
+.strip .cell .k {
+  font-size: 11px; text-transform: uppercase; letter-spacing: .07em;
+  color: var(--sky-ink-2); font-weight: 600;
+}
+.strip .cell .v {
+  font-size: clamp(18px, 2.6vw, 22px); font-weight: 550; margin-top: 3px;
+}
+.strip .cell .v small { font-size: 13px; font-weight: 500; color: var(--sky-ink-2); }
+
+/* ==========================================================================
+   Cards — the stable substrate everything measured lives on
+   ========================================================================== */
+
+.card {
+  background: var(--card);
+  color: var(--ink);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(16px, 2.4vw, 22px);
+  margin-bottom: 20px;
+  transition: background .8s ease, color .8s ease;
+}
+.card > h2 {
+  font-size: 15px; font-weight: 650; margin: 0 0 2px;
+  letter-spacing: -0.01em;
+}
+.card > .note { font-size: 13px; color: var(--ink-2); margin: 0 0 16px; }
+.card > .note:last-child { margin-bottom: 0; }
+
+/* --- 3-day tiles --------------------------------------------------------- */
+.days { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+.day {
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  padding: 16px;
+  background: var(--card-2);
+  display: flex; flex-direction: column; gap: 10px;
+}
+.day .dname { font-size: 13px; font-weight: 650; }
+.day .ddate { font-size: 12px; color: var(--ink-muted); font-weight: 500; }
+.day .drow { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.day .dwind { font-size: 30px; font-weight: 400; letter-spacing: -0.03em; }
+.day .dwind small { font-size: 13px; color: var(--ink-2); font-weight: 500; letter-spacing: 0; }
+.day .dgust { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.day .dmeta { display: flex; gap: 14px; font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.day .dverdict { display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; }
+.day .dverdict .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+.day .icon-wx { width: 30px; height: 30px; color: var(--ink-2); flex: none; }
+
+/* ==========================================================================
+   Map
+   ========================================================================== */
+
+.map-head { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.layers { display: flex; flex-wrap: wrap; gap: 6px; }
+.layers button {
+  font: inherit; font-size: 13px; font-weight: 550;
+  padding: 7px 13px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--hairline);
+  background: var(--card-2); color: var(--ink-2);
+  transition: background .15s, color .15s, border-color .15s;
+}
+.layers button:hover { background: var(--card); color: var(--ink); }
+.layers button[aria-pressed="true"] {
+  background: var(--series-wind); border-color: var(--series-wind); color: #fff;
+}
+.layers button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+#map { height: clamp(300px, 52vw, 460px); border-radius: var(--radius); overflow: hidden; z-index: 0; }
+.leaflet-container { background: var(--card-2); font-family: var(--font); }
+
+.radar-bar { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
+.radar-bar button {
+  width: 38px; height: 38px; flex: none; border-radius: 50%; cursor: pointer;
+  border: 1px solid var(--hairline); background: var(--card-2); color: var(--ink);
+  display: grid; place-items: center;
+}
+.radar-bar .track { flex: 1; height: 4px; border-radius: 2px; background: var(--grid); position: relative; }
+.radar-bar .track .fill { position: absolute; inset: 0 auto 0 0; background: var(--series-wind); border-radius: 2px; }
+.radar-bar .tlabel { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; min-width: 92px; text-align: right; }
+
+.embed-wrap { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--hairline); }
+.embed-wrap iframe { display: block; width: 100%; height: clamp(320px, 50vw, 440px); border: 0; }
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.foot {
+  margin-top: 36px; padding-top: 20px;
+  border-top: 1px solid var(--sky-glass-line);
+  font-size: 13px; color: var(--sky-ink-2);
+}
+.foot a { color: inherit; text-underline-offset: 2px; }
+.foot p { margin: 0 0 6px; }
+
+/* --- States -------------------------------------------------------------- */
+.loading { color: var(--ink-2); font-size: 14px; padding: 20px 0; }
+.error {
+  color: var(--ink); font-size: 14px; padding: 14px 16px;
+  border: 1px solid var(--hairline); border-left: 3px solid var(--critical);
+  border-radius: 8px; background: var(--card-2);
+}
+[hidden] { display: none !important; }
+
+@media (max-width: 560px) {
+  .hero-top { grid-template-columns: 1fr; }
+  .compass { justify-self: start; }
+}

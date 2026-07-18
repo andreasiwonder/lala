@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en" data-theme="clear" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alster Sailing Weather — Hamburg</title>
+<meta name="description" content="Wind, gusts, rain and sailing conditions for the Außenalster in Hamburg — with radar, seasonal history, and how much to trust the forecast.">
+<meta name="color-scheme" content="light dark">
+
+<link rel="preconnect" href="https://api.open-meteo.com">
+<link rel="preconnect" href="https://unpkg.com">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛵</text></svg>">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/charts.css">
+</head>
+<body>
+<div class="sky" aria-hidden="true"></div>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <h1>Außenalster — sailing weather</h1>
+      <p class="sub">Hamburg · 53.567° N, 10.000° E</p>
+    </div>
+    <time id="updated" datetime="">—</time>
+  </header>
+
+  <main id="main">
+
+    <!-- ================= HERO: current conditions ================= -->
+    <section class="hero" aria-labelledby="now-h">
+      <h2 id="now-h" class="visually-hidden">Current conditions</h2>
+
+      <div id="hero-error" class="error" hidden></div>
+
+      <div id="hero-body" hidden>
+        <div class="hero-top">
+          <div>
+            <div class="wind-figure">
+              <span class="value" id="wind-now">–</span>
+              <span class="unit">knots</span>
+            </div>
+            <div class="wind-meta">
+              <span>Gusting <b id="gust-now">–</b></span>
+              <span id="wx-now">–</span>
+              <span>Feels like <b id="feels-now">–</b></span>
+            </div>
+          </div>
+
+          <svg class="compass" viewBox="0 0 100 100" role="img" aria-labelledby="compass-t">
+            <title id="compass-t">Wind direction</title>
+            <circle class="ring" cx="50" cy="50" r="42"/>
+            <g class="tick">
+              <line x1="50" y1="8"  x2="50" y2="14"/>
+              <line x1="92" y1="50" x2="86" y2="50"/>
+              <line x1="50" y1="92" x2="50" y2="86"/>
+              <line x1="8"  y1="50" x2="14" y2="50"/>
+            </g>
+            <text class="card-l" x="50" y="24">N</text>
+            <g id="compass-arrow" class="arrow">
+              <!-- Points the way the wind is GOING; main.js rotates it to
+                   direction + 180°. Kept in the outer band (y 15–34) so it
+                   orbits the rim and never collides with the centre labels. -->
+              <path d="M50 15 L57 33 L50 28.5 L43 33 Z"/>
+            </g>
+            <text class="dirtext" x="50" y="58" id="dir-text">–</text>
+            <text class="card-l" x="50" y="72" id="dir-deg">–</text>
+          </svg>
+        </div>
+
+        <div class="verdict" id="verdict" role="status">
+          <span class="icon" id="verdict-icon"></span>
+          <span class="label" id="verdict-label">–</span>
+          <span class="detail" id="verdict-detail"></span>
+        </div>
+
+        <div class="hero-warnings" id="warnings"></div>
+
+        <div class="strip">
+          <div class="cell"><div class="k">Temperature</div><div class="v" id="temp-now">–</div></div>
+          <div class="cell"><div class="k">Rain chance</div><div class="v" id="pop-now">–</div></div>
+          <div class="cell"><div class="k">Surface</div><div class="v" id="chop-now">–</div></div>
+          <div class="cell"><div class="k">Fetch</div><div class="v" id="fetch-now">–</div></div>
+          <div class="cell"><div class="k">Pressure</div><div class="v" id="pres-now">–</div></div>
+        </div>
+      </div>
+
+      <p class="loading" id="hero-loading">Reading the wind…</p>
+    </section>
+
+    <!-- ================= 3-DAY FORECAST ================= -->
+    <section class="card" aria-labelledby="days-h">
+      <h2 id="days-h">Next three days</h2>
+      <p class="note">Daily maximum wind and gusts — the verdict reflects the windiest part of each day.</p>
+      <div class="days" id="days"><p class="loading">Loading…</p></div>
+    </section>
+
+    <!-- ================= HOURLY CHART ================= -->
+    <section class="card" aria-labelledby="chart-h">
+      <h2 id="chart-h">Hour by hour</h2>
+      <p class="note">Wind and gusts in knots, with rain probability beneath. Hover or tap for any hour.</p>
+      <!-- Rain is the only series in its own panel, so it is direct-labelled
+           on the chart rather than listed here — side by side in one legend its
+           blue reads as a near-duplicate of the wind blue. -->
+      <div class="legend" id="chart-legend">
+        <span class="lg"><i class="sw" style="background:var(--series-wind)"></i>Wind</span>
+        <span class="lg"><i class="sw sw-dash" style="color:var(--series-gust)"></i>Gusts</span>
+      </div>
+      <div id="timeline" class="chart"><p class="loading">Loading…</p></div>
+    </section>
+
+    <!-- ================= MAP ================= -->
+    <section class="card" aria-labelledby="map-h">
+      <div class="map-head">
+        <div>
+          <h2 id="map-h">Radar &amp; wind map</h2>
+          <p class="note" style="margin:0">Live precipitation radar and the wind field over Hamburg.</p>
+        </div>
+        <div class="layers" role="group" aria-label="Map layers">
+          <button type="button" id="btn-radar" aria-pressed="true">Rain radar</button>
+          <button type="button" id="btn-wind" aria-pressed="false">Wind</button>
+        </div>
+      </div>
+      <div id="map"></div>
+      <div class="radar-bar" id="radar-bar">
+        <button type="button" id="radar-toggle" aria-label="Play or pause the radar animation"></button>
+        <div class="track"><div class="fill" id="radar-fill" style="width:100%"></div></div>
+        <span class="tlabel" id="radar-time">—</span>
+      </div>
+      <p class="note" id="wind-layer-note" hidden></p>
+    </section>
+
+    <!-- ================= WINDY EMBED ================= -->
+    <section class="card" aria-labelledby="windy-h">
+      <h2 id="windy-h">Full weather map</h2>
+      <p class="note">Windy.com — pan out for the North Sea and Baltic, or switch layers for pressure, temperature and more.</p>
+      <div class="embed-wrap">
+        <iframe
+          title="Windy.com wind map centred on Hamburg"
+          loading="lazy"
+          src="https://embed.windy.com/embed2.html?lat=53.567&lon=10.000&detailLat=53.567&detailLon=10.000&width=650&height=450&zoom=9&level=surface&overlay=wind&menu=&message=&marker=true&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=kt&metricTemp=%C2%B0C&radarRange=-1">
+        </iframe>
+      </div>
+    </section>
+
+    <!-- ================= FORECAST ACCURACY ================= -->
+    <section class="card" aria-labelledby="acc-h">
+      <h2 id="acc-h">Should you trust the forecast?</h2>
+      <p class="note">
+        Comparing what the forecast said 1, 2 and 3 days in advance against what the
+        model later analysed as having actually happened, over the past month.
+      </p>
+      <div id="accuracy"><p class="loading">Loading…</p></div>
+      <p class="note caveat" id="accuracy-caveat" hidden></p>
+    </section>
+
+    <!-- ================= CLIMATOLOGY ================= -->
+    <section class="card" aria-labelledby="clim-h">
+      <h2 id="clim-h">What's normal here</h2>
+      <p class="note" id="clim-note">Ten years of hourly records for the Alster.</p>
+
+      <div class="clim-grid">
+        <div>
+          <div class="sub-h">
+            Wind rose
+            <select id="rose-month" aria-label="Month for the wind rose">
+              <option value="all">All year</option>
+            </select>
+          </div>
+          <div id="windrose"><p class="loading">Loading…</p></div>
+        </div>
+        <div>
+          <div class="sub-h">By month</div>
+          <div id="monthly"><p class="loading">Loading…</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STATION ================= -->
+    <section class="card" aria-labelledby="stn-h">
+      <h2 id="stn-h">Nearest real measurement</h2>
+      <p class="note" id="stn-note">A cross-check against an actual weather station, not a model.</p>
+      <div id="station"><p class="loading">Loading…</p></div>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <p>
+      Forecast, archive and reanalysis data from
+      <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0), which blends the
+      German Weather Service ICON models. Station observations from
+      <a href="https://brightsky.dev/">Bright Sky</a> /
+      <a href="https://www.dwd.de/">DWD</a>. Radar imagery
+      <a href="https://www.rainviewer.com/">RainViewer</a>. Map tiles
+      <a href="https://carto.com/attributions">CARTO</a>, data
+      <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors.
+    </p>
+    <p>
+      Conditions on the water are your own judgement call — this is a planning aid,
+      not a safety service. Non-commercial, free-tier data throughout.
+    </p>
+  </footer>
+
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-velocity@2.1.4/dist/leaflet-velocity.min.js"></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
