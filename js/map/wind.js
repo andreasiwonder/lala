@@ -13,9 +13,11 @@
 
 import { fetchWindGrid } from '../api.js';
 
-/* A box around Hamburg — wide enough for the flow to read as weather, tight
-   enough that an 8×8 grid still resolves local detail. */
-const BOX = { west: 9.60, south: 53.35, east: 10.40, north: 53.80 };
+/* The box must cover more than the visible map at the default zoom, or the
+   particle field ends in a hard rectangle mid-view. Still one request: a
+   10×10 grid is 100 coordinate pairs in a single comma-separated call. */
+const BOX = { west: 8.80, south: 52.95, east: 11.20, north: 54.25 };
+const GRID = { cols: 10, rows: 10 };
 
 export function createWind(map) {
   let layer = null;
@@ -25,7 +27,7 @@ export function createWind(map) {
     if (typeof L.velocityLayer !== 'function') {
       throw new Error('wind plugin unavailable');
     }
-    const data = await fetchWindGrid(BOX);
+    const data = await fetchWindGrid({ ...BOX, ...GRID });
     return L.velocityLayer({
       displayValues: false,
       data,

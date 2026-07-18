@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="css/theme.css">
 <link rel="stylesheet" href="css/layout.css">
 <link rel="stylesheet" href="css/charts.css">
+<link rel="stylesheet" href="css/score.css">
 </head>
 <body>
 <div class="sky" aria-hidden="true"></div>
@@ -73,6 +74,20 @@
           </svg>
         </div>
 
+        <div class="score-now">
+          <svg class="score-ring" viewBox="0 0 100 100" role="img" aria-labelledby="score-t">
+            <title id="score-t">Sailing score right now, out of 100</title>
+            <circle class="track" cx="50" cy="50" r="42"/>
+            <circle class="val" id="score-arc" cx="50" cy="50" r="42"
+                    stroke-dasharray="264" stroke-dashoffset="264"/>
+            <text class="num" x="50" y="59" id="score-num">–</text>
+          </svg>
+          <div class="score-copy">
+            <div class="sc-label" id="score-label">Scoring…</div>
+            <div class="sc-sub" id="score-sub"></div>
+          </div>
+        </div>
+
         <div class="verdict" id="verdict" role="status">
           <span class="icon" id="verdict-icon"></span>
           <span class="label" id="verdict-label">–</span>
@@ -91,6 +106,16 @@
       </div>
 
       <p class="loading" id="hero-loading">Reading the wind…</p>
+    </section>
+
+    <!-- ================= HOURLY SCORE ================= -->
+    <section class="card" aria-labelledby="score-h">
+      <h2 id="score-h">Hourly sailing score</h2>
+      <p class="note">
+        Every hour rated out of 100 from wind, gusts, rain and temperature.
+        Swipe a row for the rest of the day; darker hours are after sunset.
+      </p>
+      <div id="scorestrip"><p class="loading">Scoring…</p></div>
     </section>
 
     <!-- ================= 3-DAY FORECAST ================= -->

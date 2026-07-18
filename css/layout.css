@@ -229,7 +229,45 @@ body { margin: 0; min-height: 100vh; line-height: 1.5; }
 }
 [hidden] { display: none !important; }
 
-@media (max-width: 560px) {
+/* ==========================================================================
+   Mobile — this site is used on a phone at the dock, so touch targets and
+   thumb reach matter more than density.
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  .wrap { padding-bottom: 40px; }
+
+  /* Wind figure and compass side by side rather than stacked: the compass is
+     small enough to sit next to the number, and it saves a full screen of
+     scrolling before the score. */
+  .hero-top { grid-template-columns: 1fr auto; align-items: center; }
+  .compass { width: 96px; height: 96px; }
+  .wind-figure .value { font-size: clamp(56px, 19vw, 84px); }
+
+  .masthead { margin-bottom: 16px; }
+  .masthead h1 { font-size: 18px; }
+  .masthead time { font-size: 12px; }
+
+  .card { padding: 16px 14px; margin-bottom: 14px; }
+  .hero { padding: 18px 16px; }
+
+  /* Every interactive control clears the 44px touch-target floor. */
+  .layers button { min-height: 44px; padding: 0 16px; font-size: 14px; }
+  .radar-bar button { width: 44px; height: 44px; }
+  .sub-h select { min-height: 44px; padding: 8px 12px; }
+
+  /* Two columns read better than three cramped ones. */
+  .strip { grid-template-columns: repeat(2, 1fr); gap: 14px 12px; }
+  .days { grid-template-columns: 1fr; }
+
+  /* Full-bleed map: on a narrow screen the card padding wastes scarce width. */
+  #map { height: 300px; border-radius: 10px; }
+
+  .verdict { width: 100%; }
+  .verdict .detail { margin-left: auto; text-align: right; }
+}
+
+@media (max-width: 380px) {
   .hero-top { grid-template-columns: 1fr; }
   .compass { justify-self: start; }
 }

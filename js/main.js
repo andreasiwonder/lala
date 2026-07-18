@@ -12,6 +12,8 @@ import {
   describeCode, compassPoint, round, dayName, dateLabel, stampLabel,
   weatherIcon, iconWarning, iconCheck, iconInfo, iconPlay, iconPause,
 } from './format.js';
+import { scoreHour, scoreSeries } from './score.js';
+import { renderScoreStrip } from './scoreStrip.js';
 import { renderTimeline } from './charts/timeline.js';
 import { renderWindRose } from './charts/windRose.js';
 import { computeAccuracy, renderAccuracy } from './charts/accuracy.js';
@@ -96,15 +98,48 @@ async function loadForecast() {
     `<div class="warn" style="--warn-color:${TONE_VAR[w.tone]}">${iconWarning}<span>${w.text}</span></div>`
   ).join('');
 
+  /* --- Score, now and hour by hour ---------------------------------------- */
+  const nowScore = scoreHour({
+    windKn: wind, gustKn: gust,
+    pop: popNow ?? 0,
+    tempC: c.temperature_2m,
+    weatherCode: c.weather_code,
+    isDay: c.is_day === 1,
+  });
+  renderNowScore(nowScore);
+
   $('updated').textContent = `Updated ${stampLabel(c.time)}`;
   $('updated').setAttribute('datetime', c.time);
 
   $('hero-loading').hidden = true;
   $('hero-body').hidden = false;
 
+  renderScoreStrip($('scorestrip'), scoreSeries(forecast.hourly));
   renderDays();
   renderChart();
   return applied;
+}
+
+const SCORE_TONE = {
+  good: 'var(--good)', warning: 'var(--warning)',
+  serious: 'var(--serious)', critical: 'var(--critical)',
+};
+
+function renderNowScore(s) {
+  const CIRC = 2 * Math.PI * 42;      // r=42 in the ring's viewBox
+  const arc = $('score-arc');
+  arc.setAttribute('stroke-dasharray', CIRC.toFixed(1));
+  arc.style.setProperty('--tone', SCORE_TONE[s.band.tone]);
+  /* Fill clockwise from the top; the transition animates it in on load. */
+  requestAnimationFrame(() => {
+    arc.setAttribute('stroke-dashoffset', (CIRC * (1 - s.score / 100)).toFixed(1));
+  });
+
+  $('score-num').textContent = s.score;
+  $('score-label').textContent = `${s.band.label} — ${s.score}/100 right now`;
+  $('score-sub').textContent = s.reasons.length
+    ? s.reasons.join(' · ')
+    : 'wind, rain and temperature combined';
 }
 
 function renderDays() {

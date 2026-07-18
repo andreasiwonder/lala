@@ -49,6 +49,25 @@ from wind speed and the fetch available in that direction — the lake is ~1.6 k
 N–S but only ~1.2 km E–W, so a northerly builds noticeably more chop than an
 easterly at the same speed. It deliberately never prints a wave height in metres.
 
+## The hourly score
+
+Every hour gets a 0–100 sailing score (`js/score.js`), shown as a colour-coded
+strip per day and as a ring for the current hour. It starts from a wind curve
+that plateaus at 100 across 8–16 kn, then deducts for gustiness, rain, cold and
+fog; thunderstorms hard-cap it at 5. Nothing is a tuned black box — each hour
+carries a `reasons` array that the UI surfaces, so any reading can be explained.
+
+Each day also names its **best 3-hour window**. That length is deliberate: a
+"longest run above a threshold" is useless here, because on a typical Alster day
+almost every hour clears the bar and it reports "best 06–22h", which is not
+advice. The window also requires every hour to clear a floor, not just the
+average — otherwise 90 / 10 / 90 averages to a recommendation.
+
+The four score bands reuse the site's status colours, so green means the same
+thing here as on the verdict badge. Colour is never the only channel: every cell
+prints its number, every row states its window in words, and the legend labels
+each band.
+
 ## Design
 
 The page is **conditions-reactive**: one of six theme states (dawn, clear,

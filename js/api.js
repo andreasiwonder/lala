@@ -64,7 +64,7 @@ export async function fetchForecast() {
     ],
     hourly: [
       'temperature_2m', 'precipitation_probability', 'precipitation',
-      'weather_code', 'cloud_cover', 'visibility',
+      'weather_code', 'cloud_cover', 'visibility', 'is_day',
       'wind_speed_10m', 'wind_direction_10m', 'wind_gusts_10m',
     ],
     daily: [
