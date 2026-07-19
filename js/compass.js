@@ -21,10 +21,33 @@ export function headingFromEvent(event, screenAngle = 0) {
   return null;
 }
 
-export function initPhoneCompass({ root, face, heading, note, button }) {
-  if (!root || !face || !heading || !note || !button) return;
+export function initPhoneCompass({ root, face, heading, note, button, toggle, toggleLabel }) {
+  if (!root || !face || !heading || !note || !button || !toggle || !toggleLabel) return;
 
   const OrientationEvent = window.DeviceOrientationEvent;
+  let listening = false;
+  let enabled = false;
+  let readingReceived = false;
+  let fallbackTimer;
+
+  const stopListening = () => {
+    if (!listening) return;
+    window.removeEventListener('deviceorientationabsolute', onReading, true);
+    window.removeEventListener('deviceorientation', onReading, true);
+    clearTimeout(fallbackTimer);
+    listening = false;
+  };
+
+  const setOpen = (open) => {
+    root.hidden = !open;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggleLabel.textContent = open ? 'Hide compass' : 'Compass';
+    if (!open) stopListening();
+    else if (enabled) listen();
+  };
+
+  toggle.addEventListener('click', () => setOpen(root.hidden));
+
   if (!OrientationEvent || !window.isSecureContext) {
     heading.textContent = 'Unavailable';
     note.textContent = window.isSecureContext
@@ -34,11 +57,7 @@ export function initPhoneCompass({ root, face, heading, note, button }) {
     return;
   }
 
-  let listening = false;
-  let readingReceived = false;
-  let fallbackTimer;
-
-  const onReading = (event) => {
+  function onReading(event) {
     const screenAngle = screen.orientation?.angle || window.orientation || 0;
     const value = headingFromEvent(event, screenAngle);
     if (value == null) return;
@@ -50,11 +69,12 @@ export function initPhoneCompass({ root, face, heading, note, button }) {
     heading.textContent = `${rounded}° ${headingPoint(value)}`;
     note.textContent = 'Hold the phone flat; its top edge points on this bearing.';
     root.classList.add('is-active');
-  };
+  }
 
-  const listen = () => {
+  function listen() {
     if (listening) return;
     listening = true;
+    readingReceived = false;
     window.addEventListener('deviceorientationabsolute', onReading, true);
     window.addEventListener('deviceorientation', onReading, true);
     heading.textContent = 'Finding north…';
@@ -65,7 +85,7 @@ export function initPhoneCompass({ root, face, heading, note, button }) {
         note.textContent = 'Compass data is not available in this browser.';
       }
     }, 2500);
-  };
+  }
 
   button.addEventListener('click', async () => {
     button.disabled = true;
@@ -88,6 +108,7 @@ export function initPhoneCompass({ root, face, heading, note, button }) {
         }
         if (permission !== 'granted') throw new Error('permission denied');
       }
+      enabled = true;
       listen();
     } catch {
       heading.textContent = 'Permission needed';

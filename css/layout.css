@@ -33,6 +33,8 @@ body { margin: 0; min-height: 100vh; line-height: 1.5; }
 }
 .masthead .sub { color: var(--sky-ink-2); font-size: 14px; margin: 2px 0 0; }
 .masthead time { color: var(--sky-ink-2); font-size: 14px; font-variant-numeric: tabular-nums; }
+.masthead-tools { display: flex; align-items: center; gap: 8px; }
+.compass-toggle { display: none; }
 
 /* ==========================================================================
    Hero — current conditions. Sits directly on the sky, so it uses the glass
@@ -314,6 +316,26 @@ body { margin: 0; min-height: 100vh; line-height: 1.5; }
   .masthead { margin-bottom: 16px; }
   .masthead h1 { font-size: 18px; }
   .masthead time { font-size: 12px; }
+  .masthead-tools { align-self: center; }
+  .compass-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 44px;
+    padding: 0 11px;
+    border: 1px solid var(--sky-glass-line);
+    border-radius: 999px;
+    background: var(--sky-glass);
+    color: var(--sky-ink);
+    font: inherit;
+    font-size: 12px;
+    font-weight: 650;
+    cursor: pointer;
+  }
+  .compass-toggle svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+  .compass-toggle svg path { fill: var(--accent); stroke: none; }
+  .compass-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .compass-toggle[aria-expanded="true"] { background: var(--card); color: var(--ink); }
 
   .card { padding: 16px 14px; margin-bottom: 14px; }
   .hero { padding: 18px 16px; }

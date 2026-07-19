@@ -20,7 +20,7 @@ import { computeAccuracy, renderAccuracy } from './charts/accuracy.js';
 import { createMap } from './map/base.js';
 import { createRadar } from './map/radar.js';
 import { createWind } from './map/wind.js';
-import { initPhoneCompass } from './compass.js?v=2';
+import { initPhoneCompass } from './compass.js?v=3';
 
 const $ = (id) => document.getElementById(id);
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -394,6 +394,8 @@ initPhoneCompass({
   heading: $('phone-compass-heading'),
   note: $('phone-compass-note'),
   button: $('phone-compass-enable'),
+  toggle: $('phone-compass-toggle'),
+  toggleLabel: $('phone-compass-toggle-label'),
 });
 loadForecast().then(loadMap);
 loadAccuracy();
