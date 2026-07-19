@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 
 import { evaluate, bandFor, isThunder, GUST_FACTOR_LIMIT } from '../js/verdict.js';
 import { fetchKm, chopFor, chopIndex } from '../js/chop.js';
-import { pickState, modeFor } from '../js/theme.js';
+import { pickState, modeFor, conditionForTone } from '../js/theme.js';
 import { compassPoint, describeCode } from '../js/format.js';
 import { computeAccuracy } from '../js/charts/accuracy.js';
 
@@ -158,6 +158,15 @@ test('only storm and night use the dark card substrate', () => {
   for (const s of ['dawn', 'clear', 'overcast', 'rain']) {
     assert.equal(modeFor(s), 'light', `${s} should be light`);
   }
+});
+
+test('verdict tones map to the pastel traffic-light palette', () => {
+  assert.equal(conditionForTone('good'), 'green');
+  assert.equal(conditionForTone('neutral'), 'yellow');
+  assert.equal(conditionForTone('warning'), 'yellow');
+  assert.equal(conditionForTone('serious'), 'red');
+  assert.equal(conditionForTone('critical'), 'red');
+  assert.equal(conditionForTone('unknown'), 'yellow');
 });
 
 /* ==========================================================================

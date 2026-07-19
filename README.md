@@ -70,9 +70,10 @@ each band.
 
 ## Design
 
-The page is **conditions-reactive**: one of six theme states (dawn, clear,
-overcast, rain, storm, night) is chosen from the weather code and sun position,
-shifting the background gradient and accents.
+The page is **conditions-reactive**: the current sailing verdict selects a
+pastel traffic-light background — green for good, yellow for caution or calm,
+and red for serious or critical conditions. Weather and sun position still
+provide the initial loading theme before live conditions arrive.
 
 Charts do *not* ride that shifting background — they sit on one of exactly two
 card surfaces (light `#fcfcfb` / dark `#1a1a19`), because the series palette is

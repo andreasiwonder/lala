@@ -7,7 +7,7 @@
 import { fetchForecast, fetchAccuracy, fetchStation, fetchClimatology } from './api.js';
 import { evaluate, evaluateDay, TONE_VAR } from './verdict.js';
 import { chopFor } from './chop.js';
-import { pickState, applyState } from './theme.js';
+import { pickState, applyState, applyConditionTone } from './theme.js?v=4';
 import {
   describeCode, compassPoint, round, dayName, dateLabel, stampLabel,
   weatherIcon, iconWarning, iconCheck, iconInfo, iconPlay, iconPause,
@@ -57,7 +57,6 @@ async function loadForecast() {
     sunset: forecast.daily.sunset?.[0],
   });
   const applied = applyState(state);
-  currentMode = document.documentElement.dataset.mode;
 
   /* --- Current numbers ---------------------------------------------------- */
   const wind = c.wind_speed_10m;
@@ -88,6 +87,8 @@ async function loadForecast() {
 
   /* --- Verdict ------------------------------------------------------------ */
   const v = evaluate({ windKn: wind, gustKn: gust, weatherCode: c.weather_code });
+  applyConditionTone(v.tone);
+  currentMode = document.documentElement.dataset.mode;
   const color = TONE_VAR[v.tone];
   $('verdict').style.setProperty('--verdict-color', color);
   $('verdict-icon').innerHTML =

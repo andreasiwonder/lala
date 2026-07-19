@@ -38,6 +38,26 @@ export function pickState({ weatherCode, isDay, cloudCover = 0, now, sunrise, su
 
 export const modeFor = (state) => (DARK_STATES.has(state) ? 'dark' : 'light');
 
+const CONDITION_FOR_TONE = {
+  good: 'green',
+  neutral: 'yellow',
+  warning: 'yellow',
+  serious: 'red',
+  critical: 'red',
+};
+
+export const conditionForTone = (tone) => CONDITION_FOR_TONE[tone] || 'yellow';
+
+/** Apply the verdict's pastel traffic-light background. Pastel palettes always
+ * use the validated light card substrate so text and charts stay legible. */
+export function applyConditionTone(tone) {
+  const condition = conditionForTone(tone);
+  const root = document.documentElement;
+  root.dataset.condition = condition;
+  root.dataset.mode = 'light';
+  return condition;
+}
+
 /**
  * Apply a state to the document. `?theme=<state>` forces one, which is how the
  * six states get screenshot-tested without waiting for the weather to cooperate.

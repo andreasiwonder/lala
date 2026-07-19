@@ -122,6 +122,44 @@
 }
 
 /* ==========================================================================
+   Sailing-condition palette — the forecast verdict resolves the atmospheric
+   theme above into a simple pastel traffic light once current data arrives.
+   ========================================================================== */
+
+[data-condition="green"] {
+  --sky-1: #a8d5ae;
+  --sky-2: #d5ead2;
+  --sky-3: #f0f7ed;
+  --sky-ink: #17351e;
+  --sky-ink-2: rgba(23, 53, 30, .68);
+  --sky-glass: rgba(255, 255, 255, .48);
+  --sky-glass-line: rgba(255, 255, 255, .76);
+  --accent: #3f7f4c;
+}
+
+[data-condition="yellow"] {
+  --sky-1: #f0d78b;
+  --sky-2: #f6e8b8;
+  --sky-3: #fff8e6;
+  --sky-ink: #3f3210;
+  --sky-ink-2: rgba(63, 50, 16, .68);
+  --sky-glass: rgba(255, 255, 255, .48);
+  --sky-glass-line: rgba(255, 255, 255, .76);
+  --accent: #8a6a16;
+}
+
+[data-condition="red"] {
+  --sky-1: #e8aaa5;
+  --sky-2: #f2c8c2;
+  --sky-3: #fbecea;
+  --sky-ink: #44201c;
+  --sky-ink-2: rgba(68, 32, 28, .68);
+  --sky-glass: rgba(255, 255, 255, .48);
+  --sky-glass-line: rgba(255, 255, 255, .76);
+  --accent: #a1443c;
+}
+
+/* ==========================================================================
    Background — the "alive" layer
    ========================================================================== */
 
