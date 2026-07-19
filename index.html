@@ -74,6 +74,29 @@
           </svg>
         </div>
 
+        <div class="phone-compass" id="phone-compass">
+          <div class="phone-compass-readout">
+            <span class="phone-compass-label">Phone compass</span>
+            <strong id="phone-compass-heading">Not enabled</strong>
+            <span class="phone-compass-note" id="phone-compass-note">Hold the phone flat; its top edge is the bearing line.</span>
+          </div>
+          <svg class="phone-compass-dial" viewBox="0 0 100 100" role="img" aria-labelledby="phone-compass-title">
+            <title id="phone-compass-title">Phone heading compass</title>
+            <circle class="phone-compass-ring" cx="50" cy="50" r="43"/>
+            <g id="phone-compass-face">
+              <path class="phone-compass-north" d="M50 12 L56 45 L50 39 L44 45 Z"/>
+              <path class="phone-compass-south" d="M50 88 L44 55 L50 61 L56 55 Z"/>
+              <text x="50" y="23">N</text>
+              <text x="79" y="54">E</text>
+              <text x="50" y="84">S</text>
+              <text x="21" y="54">W</text>
+            </g>
+            <path class="phone-compass-bearing" d="M46 4 L54 4 L50 10 Z"/>
+            <circle class="phone-compass-hub" cx="50" cy="50" r="4"/>
+          </svg>
+          <button type="button" id="phone-compass-enable">Enable compass</button>
+        </div>
+
         <div class="score-now">
           <svg class="score-ring" viewBox="0 0 100 100" role="img" aria-labelledby="score-t">
             <title id="score-t">Sailing score right now, out of 100</title>

@@ -20,6 +20,7 @@ import { computeAccuracy, renderAccuracy } from './charts/accuracy.js';
 import { createMap } from './map/base.js';
 import { createRadar } from './map/radar.js';
 import { createWind } from './map/wind.js';
+import { initPhoneCompass } from './compass.js';
 
 const $ = (id) => document.getElementById(id);
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -387,6 +388,13 @@ window.addEventListener('resize', () => {
 });
 
 /* Sections load in parallel and fail independently. */
+initPhoneCompass({
+  root: $('phone-compass'),
+  face: $('phone-compass-face'),
+  heading: $('phone-compass-heading'),
+  note: $('phone-compass-note'),
+  button: $('phone-compass-enable'),
+});
 loadForecast().then(loadMap);
 loadAccuracy();
 loadClimatology();

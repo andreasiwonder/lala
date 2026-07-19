@@ -90,6 +90,10 @@ body { margin: 0; min-height: 100vh; line-height: 1.5; }
 .compass .arrow  { fill: var(--accent); transition: transform .9s cubic-bezier(.22,1,.36,1); }
 .compass .dirtext { fill: var(--sky-ink); font-size: 15px; font-weight: 650; text-anchor: middle; }
 
+/* Device heading is a mobile-only, opt-in enhancement. It is kept separate
+   from the weather compass above: one points north, the other describes wind. */
+.phone-compass { display: none; }
+
 /* --- Verdict badge — status colour ALWAYS with icon + text ---------------- */
 .verdict {
   display: inline-flex; align-items: center; gap: 10px;
@@ -244,6 +248,69 @@ body { margin: 0; min-height: 100vh; line-height: 1.5; }
   .compass { width: 96px; height: 96px; }
   .wind-figure .value { font-size: clamp(56px, 19vw, 84px); }
 
+  .phone-compass {
+    display: grid;
+    grid-template-columns: 1fr 82px;
+    grid-template-rows: auto auto;
+    gap: 10px 14px;
+    align-items: center;
+    margin-top: 18px;
+    padding: 14px;
+    border: 1px solid var(--sky-glass-line);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, .12);
+  }
+  .phone-compass-readout { min-width: 0; }
+  .phone-compass-label {
+    display: block;
+    color: var(--sky-ink-2);
+    font-size: 11px;
+    font-weight: 650;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+  }
+  .phone-compass-readout strong {
+    display: block;
+    margin-top: 2px;
+    font-size: 22px;
+    font-variant-numeric: tabular-nums;
+  }
+  .phone-compass-note {
+    display: block;
+    margin-top: 2px;
+    color: var(--sky-ink-2);
+    font-size: 12px;
+    line-height: 1.35;
+  }
+  .phone-compass-dial { width: 82px; height: 82px; grid-area: 1 / 2 / 3 / 3; }
+  .phone-compass-ring { fill: none; stroke: var(--sky-ink); stroke-width: 1.5; opacity: .22; }
+  #phone-compass-face { transform-origin: 50px 50px; transition: transform .16s linear; }
+  #phone-compass-face text {
+    fill: var(--sky-ink); font-size: 9px; font-weight: 700;
+    text-anchor: middle; dominant-baseline: middle;
+  }
+  .phone-compass-north { fill: #d03b3b; }
+  .phone-compass-south { fill: var(--sky-ink); opacity: .45; }
+  .phone-compass-bearing { fill: var(--sky-ink); opacity: .7; }
+  .phone-compass-hub { fill: var(--sky-ink); }
+  #phone-compass-enable {
+    justify-self: start;
+    min-height: 44px;
+    padding: 0 16px;
+    border: 1px solid var(--sky-glass-line);
+    border-radius: 999px;
+    background: var(--card);
+    color: var(--ink);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 650;
+    cursor: pointer;
+  }
+  #phone-compass-enable:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .phone-compass.is-active { grid-template-rows: auto; }
+  .phone-compass.is-active .phone-compass-dial { grid-row: 1; }
+  .phone-compass.is-active #phone-compass-enable { display: none; }
+
   .masthead { margin-bottom: 16px; }
   .masthead h1 { font-size: 18px; }
   .masthead time { font-size: 12px; }
@@ -265,6 +332,10 @@ body { margin: 0; min-height: 100vh; line-height: 1.5; }
 
   .verdict { width: 100%; }
   .verdict .detail { margin-left: auto; text-align: right; }
+}
+
+@media (max-width: 640px) and (prefers-reduced-motion: reduce) {
+  #phone-compass-face { transition: none; }
 }
 
 @media (max-width: 380px) {
