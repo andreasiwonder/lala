@@ -21,5 +21,6 @@ test('prefers the native iOS compass heading', () => {
 test('converts an absolute orientation alpha and screen rotation', () => {
   assert.equal(headingFromEvent({ absolute: true, alpha: 270 }, 0), 90);
   assert.equal(headingFromEvent({ absolute: true, alpha: 270 }, 90), 180);
+  assert.equal(headingFromEvent({ type: 'deviceorientationabsolute', alpha: 270 }, 0), 90);
   assert.equal(headingFromEvent({ absolute: false, alpha: 270 }, 0), null);
 });

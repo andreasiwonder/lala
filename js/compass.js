@@ -14,7 +14,8 @@ export function headingFromEvent(event, screenAngle = 0) {
     // applying the display rotation again would double-correct landscape use.
     return normalizeHeading(event.webkitCompassHeading);
   }
-  if (event.absolute === true && Number.isFinite(event.alpha)) {
+  if ((event.absolute === true || event.type === 'deviceorientationabsolute') &&
+      Number.isFinite(event.alpha)) {
     return normalizeHeading(360 - event.alpha + screenAngle);
   }
   return null;
@@ -68,17 +69,29 @@ export function initPhoneCompass({ root, face, heading, note, button }) {
 
   button.addEventListener('click', async () => {
     button.disabled = true;
+    button.textContent = 'Starting…';
+    heading.textContent = 'Requesting access…';
+    note.textContent = 'Your browser may ask for motion and orientation access.';
     try {
       if (typeof OrientationEvent.requestPermission === 'function') {
-        // Absolute permission includes magnetometer access in browsers that
-        // implement the current Device Orientation specification.
-        const permission = await OrientationEvent.requestPermission(true);
+        let permission;
+        try {
+          // Current implementations accept `true` to include magnetometer
+          // access; older Safari versions expose the method with no argument.
+          const hasWebKitHeading = 'webkitCompassHeading' in OrientationEvent.prototype;
+          permission = hasWebKitHeading
+            ? await OrientationEvent.requestPermission()
+            : await OrientationEvent.requestPermission(true);
+        } catch (error) {
+          if (!(error instanceof TypeError)) throw error;
+          permission = await OrientationEvent.requestPermission();
+        }
         if (permission !== 'granted') throw new Error('permission denied');
       }
       listen();
     } catch {
       heading.textContent = 'Permission needed';
-      note.textContent = 'Allow motion and orientation access to use the compass.';
+      note.textContent = 'Allow motion access in your browser settings, then try again.';
       button.textContent = 'Try again';
       button.disabled = false;
     }

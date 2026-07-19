@@ -20,7 +20,7 @@ import { computeAccuracy, renderAccuracy } from './charts/accuracy.js';
 import { createMap } from './map/base.js';
 import { createRadar } from './map/radar.js';
 import { createWind } from './map/wind.js';
-import { initPhoneCompass } from './compass.js';
+import { initPhoneCompass } from './compass.js?v=2';
 
 const $ = (id) => document.getElementById(id);
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June',
