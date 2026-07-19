@@ -50,12 +50,19 @@ git push -q "https://github.com/$FULL.git" main:main
 echo "    pushed"
 
 echo "==> Enabling GitHub Pages"
+# GitHub auto-enables Pages for a repo named <org>.github.io, and the enable
+# call then returns 409. Treat "already enabled" as success rather than fatal —
+# the POST racing against GitHub's own setup is the normal path here, not an error.
 if gh api "repos/$FULL/pages" --jq '.html_url' >/dev/null 2>&1; then
-  echo "    already enabled"
-else
-  gh api -X POST "repos/$FULL/pages" \
-    -f "source[branch]=main" -f "source[path]=/" >/dev/null
+  echo "    already enabled (automatic for <org>.github.io)"
+elif gh api -X POST "repos/$FULL/pages" \
+       -f "source[branch]=main" -f "source[path]=/" >/dev/null 2>&1; then
   echo "    enabled"
+elif gh api "repos/$FULL/pages" --jq '.html_url' >/dev/null 2>&1; then
+  echo "    enabled concurrently by GitHub"
+else
+  echo "ERROR: could not enable Pages on $FULL" >&2
+  exit 1
 fi
 
 echo "==> Wiring origin to push to both remotes"
