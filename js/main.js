@@ -21,6 +21,7 @@ import { createMap } from './map/base.js';
 import { createRadar } from './map/radar.js';
 import { createWind } from './map/wind.js';
 import { initPhoneCompass } from './compass.js?v=3';
+import { FORECAST_REFRESH_MS, needsForecastRefresh } from './refresh.js';
 
 const $ = (id) => document.getElementById(id);
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -28,19 +29,35 @@ const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June',
 
 let forecast = null;
 let currentMode = 'light';
+let forecastLoadedAt = 0;
+let forecastLoading = false;
 
 /* ==========================================================================
    Hero + days + chart
    ========================================================================== */
 
 async function loadForecast() {
+  if (forecastLoading) return;
+  forecastLoading = true;
+  try {
+    return await fetchAndRenderForecast();
+  } finally {
+    forecastLoading = false;
+  }
+}
+
+async function fetchAndRenderForecast() {
   try {
     forecast = await fetchForecast();
   } catch (err) {
-    $('hero-loading').hidden = true;
-    const box = $('hero-error');
-    box.hidden = false;
-    box.textContent = `Could not load the forecast: ${err.message}`;
+    /* A background refresh failure should not replace valid conditions that
+       are already on screen. The next scheduled refresh will try again. */
+    if (!forecast) {
+      $('hero-loading').hidden = true;
+      const box = $('hero-error');
+      box.hidden = false;
+      box.textContent = `Could not load the forecast: ${err.message}`;
+    }
     return;
   }
 
@@ -112,6 +129,7 @@ async function loadForecast() {
 
   $('updated').textContent = `Updated ${stampLabel(c.time)}`;
   $('updated').setAttribute('datetime', c.time);
+  $('hero-error').hidden = true;
 
   $('hero-loading').hidden = true;
   $('hero-body').hidden = false;
@@ -119,6 +137,7 @@ async function loadForecast() {
   renderScoreStrip($('scorestrip'), scoreSeries(forecast.hourly));
   renderDays();
   renderChart();
+  forecastLoadedAt = Date.now();
   return applied;
 }
 
@@ -399,6 +418,15 @@ initPhoneCompass({
   toggleLabel: $('phone-compass-toggle-label'),
 });
 loadForecast().then(loadMap);
+/* Keep long-lived tabs honest: refresh on a timer, and immediately when the
+   sailor returns after the tab has been in the background for ten minutes. */
+setInterval(loadForecast, FORECAST_REFRESH_MS + 1000);
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible' &&
+      needsForecastRefresh(forecastLoadedAt)) {
+    loadForecast();
+  }
+});
 loadAccuracy();
 loadClimatology();
 loadStation();
