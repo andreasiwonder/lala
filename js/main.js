@@ -104,8 +104,6 @@ async function fetchAndRenderForecast() {
 
   /* --- Verdict ------------------------------------------------------------ */
   const v = evaluate({ windKn: wind, gustKn: gust, weatherCode: c.weather_code });
-  applyConditionTone(v.tone);
-  currentMode = document.documentElement.dataset.mode;
   const color = TONE_VAR[v.tone];
   $('verdict').style.setProperty('--verdict-color', color);
   $('verdict-icon').innerHTML =
@@ -125,6 +123,11 @@ async function fetchAndRenderForecast() {
     weatherCode: c.weather_code,
     isDay: c.is_day === 1,
   });
+  /* The background follows the comprehensive score shown in the hero ring,
+     not the narrower wind verdict. That keeps a Poor 44/100 visibly red even
+     when its wind-only label is merely cautionary. */
+  applyConditionTone(nowScore.band.tone);
+  currentMode = document.documentElement.dataset.mode;
   renderNowScore(nowScore);
 
   $('updated').textContent = `Updated ${stampLabel(c.time)}`;

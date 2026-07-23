@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { scoreHour, windScore, bandFor, bestWindow, dayPeak, scoreSeries } from '../js/score.js';
+import { conditionForTone } from '../js/theme.js';
 
 /* ==========================================================================
    Wind curve
@@ -104,6 +105,11 @@ test('bands cover the whole range with no gaps', () => {
   assert.equal(bandFor(25).key, 'poor');
   assert.equal(bandFor(24).key, 'bad');
   assert.equal(bandFor(0).key, 'bad');
+});
+
+test('a Poor hero score drives the red condition background', () => {
+  assert.equal(bandFor(44).label, 'Poor');
+  assert.equal(conditionForTone(bandFor(44).tone), 'red');
 });
 
 /* ==========================================================================
