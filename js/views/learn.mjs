@@ -123,6 +123,27 @@ export function LearnView(ctx) {
     else advancePhase();
   }
 
+  function prev() {
+    if (strip && pos > 0) strip.goTo(pos - 1);
+  }
+
+  /** @param {KeyboardEvent} e */
+  function onKey(e) {
+    if (e.key === 'Escape') {
+      ctx.navigate('#/');
+      return;
+    }
+    if (phase === 'done') return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'Enter') {
+      e.preventDefault();
+      onNext();
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      prev();
+    }
+  }
+  window.addEventListener('keydown', onKey);
+
   function advancePhase() {
     if (phase === 'words' && sentences.length) {
       phase = 'sentences';
@@ -139,7 +160,10 @@ export function LearnView(ctx) {
   }
 
   mountPhase();
-  /** @type {any} */ (root).__dispose = () => strip?.destroy();
+  /** @type {any} */ (root).__dispose = () => {
+    window.removeEventListener('keydown', onKey);
+    strip?.destroy();
+  };
   return root;
 }
 

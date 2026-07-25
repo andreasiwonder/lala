@@ -18,6 +18,7 @@
  * @property {Map<string, Entry>} index
  * @property {(card: Card, rating: Rating) => Promise<Card>} rate
  * @property {(card: Card) => Promise<Card>} introduce
+ * @property {(card: Card) => Promise<Card>} setCard
  * @property {(hash: string) => void} navigate
  */
 import { signal, effect } from './lib/reactive.mjs';
@@ -99,6 +100,18 @@ export async function createApp() {
     return next;
   }
 
+  /**
+   * Overwrite a card's stored state (used by Review's undo to restore the
+   * pre-rating snapshot). Does not touch streak/daily counters.
+   * @param {Card} card
+   * @returns {Promise<Card>}
+   */
+  async function setCard(card) {
+    await db.saveCard(card);
+    cards.update((list) => list.map((c) => (c.entryId === card.entryId ? card : c)));
+    return card;
+  }
+
   /** @type {AppContext} */
   const ctx = {
     settings,
@@ -107,6 +120,7 @@ export async function createApp() {
     index,
     rate,
     introduce,
+    setCard,
     navigate: (hash) => {
       location.hash = hash;
     },
