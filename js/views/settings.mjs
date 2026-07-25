@@ -39,8 +39,11 @@ export function SettingsView(ctx) {
       choice('Theme', [['system', 'System'], ['light', 'Light'], ['dark', 'Dark']], s.theme, (v) =>
         set({ theme: /** @type {any} */ (v) }),
       ),
-      choice('Daily pace', [[5, 'Relaxed (5)'], [10, 'Steady (10)'], [20, 'Intense (20)']], s.dailyNewLimit, (v) =>
-        set({ dailyNewLimit: Number(v) }),
+      choice(
+        'Daily pace',
+        [[5, 'Relaxed (5)'], [10, 'Steady (10)'], [20, 'Intense (20)'], [40, 'Cram (40)'], [50, 'Max (50)']],
+        s.dailyNewLimit,
+        (v) => set({ dailyNewLimit: Number(v) }),
       ),
       choice(
         'Level',

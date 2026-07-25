@@ -17,6 +17,7 @@
  */
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { meta, units as sourceUnits } from '../content/deck.source.mjs';
+import { units as extraUnits } from '../content/deck.extra.mjs';
 import { validateDeck, DECK_SCHEMA_VERSION } from '../js/deck/schema.mjs';
 
 /** @param {any} example */
@@ -30,7 +31,9 @@ const entries = [];
 /** @type {any[]} */
 const units = [];
 
-sourceUnits.forEach((unit, unitIndex) => {
+const allUnits = [...sourceUnits, ...extraUnits];
+
+allUnits.forEach((unit, unitIndex) => {
   /** @type {string[]} */
   const entryIds = [];
   for (const src of unit.entries) {

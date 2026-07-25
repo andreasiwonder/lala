@@ -30,6 +30,8 @@ const PACES = [
   [5, 'Relaxed — 5 new/day'],
   [10, 'Steady — 10 new/day'],
   [20, 'Intense — 20 new/day'],
+  [40, 'Cram — 40 new/day'],
+  [50, 'Max — 50 new/day'],
 ];
 
 /**
