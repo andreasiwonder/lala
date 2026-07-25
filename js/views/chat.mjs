@@ -103,7 +103,7 @@ export function ChatView(ctx) {
   }
 
   function startListening() {
-    if (!voiceOn() || phase.peek() !== 'idle') return;
+    if (!voiceOn() || !ctx.settings.peek().apiKey || phase.peek() !== 'idle') return;
     const rec = ensureRecognizer();
     if (!rec) return;
     interim.set('');
@@ -221,8 +221,18 @@ export function ChatView(ctx) {
     messages.set([{ id: nextId(), role: 'assistant', text: sc.opener }]);
     totals.set({ input: 0, output: 0, cost: 0 });
     persist();
-    // Kick off the hands-free loop: speak the opener, then listen.
-    if (voiceOn()) speakAndContinue(sc.opener);
+    // Speak the opener, but DON'T auto-open the mic — the first listen must be
+    // a user tap so the browser ties the mic-permission prompt to a gesture.
+    // After that, replies chain into hands-free listening automatically.
+    if (voiceOn()) {
+      phase.set('speaking');
+      speak(sc.opener, {
+        voiceURI: ctx.settings.peek().voiceURI,
+        onend: () => {
+          if (phase.peek() === 'speaking') phase.set('idle');
+        },
+      });
+    }
   }
 
   function reset() {
@@ -465,7 +475,7 @@ function glossBar(pop, onClose) {
  */
 function voiceBar(phase, interim, hasKey, onMic, onType) {
   const label =
-    phase === 'listening' ? (interim || 'Listening… tap to send')
+    phase === 'listening' ? 'Listening… tap to send'
     : phase === 'thinking' ? 'Thinking…'
     : phase === 'speaking' ? 'Tutor is speaking… tap to jump in'
     : hasKey ? 'Tap and speak Turkish' : 'Add your API key in Settings';
