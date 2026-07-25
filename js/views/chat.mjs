@@ -180,7 +180,9 @@ export function ChatView(ctx) {
     const settings = ctx.settings.peek();
     if (!trimmed || phase.peek() === 'thinking' || !settings.apiKey) return;
 
-    messages.update((m) => [...m, { id: nextId(), role: 'user', text: trimmed }]);
+    const userId = nextId();
+    messages.update((m) => [...m, { id: userId, role: 'user', text: trimmed }]);
+    translateMine(userId, trimmed); // show the English of what you said, under your bubble
 
     const history = buildApiMessages(messages.peek()).slice(-MAX_HISTORY);
     const vocab = knownVocab(ctx.cards.peek(), ctx.index);
@@ -274,6 +276,24 @@ export function ChatView(ctx) {
   }
 
   /* --- helpers (translate / gloss) -------------------------------------- */
+
+  /**
+   * Auto-translate the learner's own message to English (so they can check the
+   * mic heard them right). Fire-and-forget; doesn't block the tutor's reply.
+   * @param {string} id @param {string} turkish
+   */
+  async function translateMine(id, turkish) {
+    const settings = ctx.settings.peek();
+    if (!settings.apiKey) return;
+    try {
+      const { text, usage } = await translateHelper({ apiKey: settings.apiKey, model: settings.helperModel, text: turkish });
+      messages.update((m) => m.map((msg) => (msg.id === id ? { ...msg, translation: text } : msg)));
+      addUsage(usage, settings.helperModel);
+      persist();
+    } catch {
+      /* translation is a nicety — ignore failures */
+    }
+  }
 
   /** @param {string} msgId @param {string} reply */
   async function doTranslate(msgId, reply) {
@@ -422,7 +442,12 @@ function messageList(msgs, canSpeak, onTranslate, onWord) {
  */
 function messageBubble(m, canSpeak, onTranslate, onWord) {
   if (m.role === 'user') {
-    return el('div.msg.user', null, el('div.bubble', null, m.text));
+    return el(
+      'div.msg.user',
+      null,
+      el('div.bubble', null, m.text),
+      m.translation ? el('div.translation.muted', null, m.translation) : null,
+    );
   }
   if (m.error) {
     return el('div.msg.assistant', null, el('div.bubble.err', null, `⚠ ${m.text}`));

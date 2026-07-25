@@ -190,6 +190,53 @@
   font-size: 0.78rem;
   margin-top: 2px;
 }
+
+/* Learn word-wall: focus card + all batch words persistently visible */
+.learn-main {
+  display: flex;
+}
+.learn-card {
+  width: 100%;
+  min-height: 170px;
+  gap: 10px;
+  padding: 22px 20px;
+}
+.word-wall {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.wordchip {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  text-align: left;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+}
+.chip-tr {
+  font-weight: 600;
+}
+.chip-en {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.wordchip.active {
+  border-color: var(--teal);
+  background: color-mix(in srgb, var(--teal) 12%, var(--surface));
+  transform: scale(1.02);
+}
+.wordchip.seen {
+  opacity: 0.68;
+}
+.wordchip.seen .chip-tr::after {
+  content: ' ✓';
+  color: var(--good);
+  font-weight: 700;
+}
 .ratings button:active {
   transform: translateY(1px);
 }

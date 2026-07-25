@@ -1,20 +1,19 @@
 // @ts-check
 /**
- * Learn view — the *presentation* step that precedes testing. Shows the next
- * batch of new words (≤10, capped by the daily new limit) as a coverflow
- * filmstrip: the current word is big in the centre, the ones you've just seen
- * peek beside it so the whole batch prints into memory. Then their short
- * example sentences, then the batch moves into spaced-repetition review.
+ * Learn view — the *presentation* step before testing. The whole batch of new
+ * words stays on screen the entire time as a "word wall" (so they keep getting
+ * reinforced visually), with the current one enlarged as a focus card above.
+ * Advance through the words, then their short example sentences; the batch then
+ * enters spaced-repetition review.
  *
- * Built imperatively (not via a re-rendering effect) so the filmstrip's scroll
- * position survives navigation.
+ * Built imperatively so the wall stays put while the focus card and highlight
+ * move.
  *
  * @typedef {import('../app.mjs').AppContext} AppContext
  * @typedef {'words' | 'sentences' | 'done'} Phase
  * @typedef {import('../deck/schema.mjs').Entry} Entry
  */
 import { el, render } from '../lib/reactive.mjs';
-import { createFilmstrip } from '../lib/filmstrip.mjs';
 import { newBatch } from '../srs/queue.mjs';
 import { newRemaining } from '../store/settings.mjs';
 import { dayKey } from '../lib/day.mjs';
@@ -35,9 +34,9 @@ export function LearnView(ctx) {
   const words = batchCards
     .map((c) => ctx.index.get(c.entryId))
     .filter(/** @returns {e is Entry} */ (e) => Boolean(e));
-  const sentences = words
-    .filter((w) => w.examples[0])
-    .map((w) => ({ tr: w.examples[0].tr, en: w.examples[0].en, word: w.tr }));
+  // One "sentence card" per word, aligned 1:1 (fall back to the word if it has
+  // no example) so the wall highlight maps directly in both phases.
+  const sentences = words.map((w) => (w.examples[0] ? { tr: w.examples[0].tr, en: w.examples[0].en } : { tr: w.tr, en: w.en }));
 
   if (!words.length) {
     root.append(emptyState(ctx));
@@ -46,85 +45,123 @@ export function LearnView(ctx) {
 
   /** @type {Phase} */
   let phase = 'words';
-  let pos = 0;
-  let lastSpoken = -1;
-  /** @type {import('../lib/filmstrip.mjs').Filmstrip | null} */
-  let strip = null;
+  let idx = 0;
+  let maxSeen = 0;
+  let lastSpoken = '';
+  const introduced = new Set();
 
   const headerEl = el('header.topbar');
-  const bodyEl = el('div.learn-body');
+  const mainEl = el('div.learn-main');
+  const wallEl = el('div.word-wall');
   const footerEl = el('div.learn-footer');
-  root.append(headerEl, bodyEl, footerEl);
+  root.append(headerEl, mainEl, wallEl, footerEl);
 
-  const items = () => (phase === 'words' ? words : sentences);
+  // The word wall is built once and reused throughout the session.
+  const chips = words.map((w, i) =>
+    el('button.wordchip', { onclick: () => select(i) }, el('span.chip-tr', null, w.tr), el('span.chip-en', null, w.en)),
+  );
+  wallEl.append(...chips);
+
+  function total() {
+    return phase === 'words' ? words.length : sentences.length;
+  }
 
   function maybeSpeak() {
-    if (!canSpeak || pos === lastSpoken) return;
-    lastSpoken = pos;
-    const it = items()[pos];
+    const key = `${phase}:${idx}`;
+    if (!canSpeak || phase === 'done' || key === lastSpoken) return;
+    lastSpoken = key;
+    const it = phase === 'words' ? words[idx] : sentences[idx];
     if (it) speak(it.tr);
   }
 
-  function updateChrome() {
-    const total = items().length || 1;
-    const pct = phase === 'done' ? 100 : Math.round(((pos + 1) / total) * 100);
+  function introduceCurrent() {
+    if (phase !== 'words' || introduced.has(idx)) return;
+    introduced.add(idx);
+    ctx.introduce(batchCards[idx]); // idempotent; counts the word as learned
+  }
+
+  function paintWall() {
+    if (phase === 'words') maxSeen = Math.max(maxSeen, idx);
+    const allSeen = phase !== 'words';
+    chips.forEach((chip, i) => {
+      const active = i === idx && phase !== 'done';
+      chip.classList.toggle('active', active);
+      chip.classList.toggle('seen', !active && (allSeen || i <= maxSeen || phase === 'done'));
+    });
+  }
+
+  function renderMain() {
+    if (phase === 'done') {
+      render(mainEl, doneState(ctx, words.length));
+      return;
+    }
+    render(mainEl, phase === 'words' ? wordCard(words[idx], canSpeak) : sentenceCard(words[idx], sentences[idx], canSpeak));
+  }
+
+  function renderChrome() {
+    const t = total();
+    const pct = phase === 'done' ? 100 : Math.round(((idx + 1) / t) * 100);
     render(
       headerEl,
-      el('button.icon', { onclick: () => ctx.navigate('#/'), 'aria-label': 'Quit', title: 'Quit' }, '✕'),
+      el('button.icon', { onclick: () => ctx.navigate('#/'), 'aria-label': 'Quit', title: 'Quit (Esc)' }, '✕'),
       el('div.bar.grow', null, el('div.bar-fill', { style: `width:${pct}%` })),
-      el('span.muted', null, phase === 'done' ? '' : `${pos + 1}/${total}`),
+      el('span.muted', null, phase === 'done' ? '' : `${idx + 1}/${t}`),
     );
     render(
       footerEl,
       phase === 'done'
         ? null
-        : el(
-            'button.primary.big',
-            { onclick: onNext },
-            pos + 1 < total ? 'Next' : phase === 'words' && sentences.length ? 'See sentences →' : 'Done ✓',
-          ),
+        : el('button.primary.big', { onclick: onNext }, idx + 1 < t ? 'Next' : phase === 'words' ? 'See sentences →' : 'Done ✓'),
     );
   }
 
-  function mountPhase() {
-    if (strip) {
-      strip.destroy();
-      strip = null;
-    }
-    bodyEl.replaceChildren();
-    pos = 0;
-    lastSpoken = -1;
-
-    if (phase === 'done') {
-      bodyEl.append(doneState(ctx, words.length));
-      updateChrome();
-      return;
-    }
-
-    const list = items();
-    strip = createFilmstrip({
-      items: list,
-      renderCard: phase === 'words' ? (w) => wordCard(w, canSpeak) : (s) => sentenceCard(s, canSpeak),
-      onSettle: (i) => {
-        pos = i;
-        updateChrome();
-        maybeSpeak();
-      },
-    });
-    bodyEl.append(strip.el);
-    updateChrome();
+  function refresh() {
+    introduceCurrent();
+    renderMain();
+    paintWall();
+    renderChrome();
     maybeSpeak();
-    requestAnimationFrame(() => strip?.goTo(0, false));
+  }
+
+  /** @param {number} i */
+  function select(i) {
+    if (phase === 'done' || i < 0 || i >= total()) return;
+    idx = i;
+    refresh();
   }
 
   function onNext() {
-    const list = items();
-    if (pos + 1 < list.length) strip?.goTo(pos + 1);
+    if (idx + 1 < total()) select(idx + 1);
     else advancePhase();
   }
 
   function prev() {
-    if (strip && pos > 0) strip.goTo(pos - 1);
+    if (idx > 0) select(idx - 1);
+  }
+
+  function advancePhase() {
+    if (phase === 'words') {
+      phase = 'sentences';
+      idx = 0;
+      lastSpoken = '';
+      refresh();
+    } else {
+      finish();
+    }
+  }
+
+  function finish() {
+    phase = 'done';
+    // Ensure the whole batch is introduced (e.g. if they jumped around).
+    batchCards.forEach((c, i) => {
+      if (!introduced.has(i)) {
+        introduced.add(i);
+        ctx.introduce(c);
+      }
+    });
+    renderMain();
+    paintWall();
+    renderChrome();
   }
 
   /** @param {KeyboardEvent} e */
@@ -144,26 +181,8 @@ export function LearnView(ctx) {
   }
   window.addEventListener('keydown', onKey);
 
-  function advancePhase() {
-    if (phase === 'words' && sentences.length) {
-      phase = 'sentences';
-      mountPhase();
-    } else {
-      finish();
-    }
-  }
-
-  function finish() {
-    phase = 'done';
-    mountPhase();
-    Promise.all(batchCards.map((c) => ctx.introduce(c)));
-  }
-
-  mountPhase();
-  /** @type {any} */ (root).__dispose = () => {
-    window.removeEventListener('keydown', onKey);
-    strip?.destroy();
-  };
+  refresh();
+  /** @type {any} */ (root).__dispose = () => window.removeEventListener('keydown', onKey);
   return root;
 }
 
@@ -175,7 +194,7 @@ export function LearnView(ctx) {
  */
 function wordCard(entry, canSpeak) {
   return el(
-    'div.card.flashcard',
+    'div.card.flashcard.learn-card',
     null,
     el('div.kicker', null, entry.type === 'chunk' ? 'phrase' : entry.pos),
     el(
@@ -185,19 +204,19 @@ function wordCard(entry, canSpeak) {
       canSpeak ? el('button.icon.speak', { onclick: () => speak(entry.tr), 'aria-label': 'Play', title: 'Play' }, '🔊') : null,
     ),
     el('div.learn-en', null, entry.en),
-    entry.notes ? el('p.notes.muted', null, entry.notes) : null,
   );
 }
 
 /**
- * @param {{ tr: string, en: string, word: string }} s
+ * @param {Entry} word
+ * @param {{ tr: string, en: string }} s
  * @param {boolean} canSpeak
  */
-function sentenceCard(s, canSpeak) {
+function sentenceCard(word, s, canSpeak) {
   return el(
-    'div.card.flashcard',
+    'div.card.flashcard.learn-card',
     null,
-    el('div.kicker', null, s.word),
+    el('div.kicker', null, word.tr),
     el(
       'div.answer-row',
       null,
@@ -224,10 +243,10 @@ function emptyState(ctx) {
 /** @param {AppContext} ctx @param {number} count */
 function doneState(ctx, count) {
   return el(
-    'div.card.center',
+    'div.card.center.learn-card',
     null,
     el('div.big-emoji', null, '🌱'),
-    el('h2', null, `Learned ${count} new word${count === 1 ? '' : 's'}`),
+    el('h2', null, `Learned ${count} word${count === 1 ? '' : 's'}`),
     el('p.muted', null, 'They’re now in your reviews. Lock them in with a quick review.'),
     el('button.primary', { onclick: () => ctx.navigate('#/review') }, 'Review now'),
     el('button.link', { onclick: () => ctx.navigate('#/') }, 'Back to Today'),
