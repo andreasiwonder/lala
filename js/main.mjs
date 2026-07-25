@@ -7,6 +7,7 @@ import { createApp } from './app.mjs';
 import { render } from './lib/reactive.mjs';
 import { OnboardingView } from './views/onboarding.mjs';
 import { DashboardView } from './views/dashboard.mjs';
+import { LearnView } from './views/learn.mjs';
 import { ReviewView } from './views/review.mjs';
 import { SettingsView } from './views/settings.mjs';
 import { ChatView } from './views/chat.mjs';
@@ -16,6 +17,7 @@ const appRoot = /** @type {HTMLElement} */ (document.getElementById('app'));
 /** @type {Record<string, (ctx: import('./app.mjs').AppContext) => HTMLElement>} */
 const ROUTES = {
   '#/': DashboardView,
+  '#/learn': LearnView,
   '#/review': ReviewView,
   '#/settings': SettingsView,
   '#/chat': ChatView,

@@ -76,6 +76,17 @@
   letter-spacing: -0.01em;
 }
 
+/* Learn (presentation) view */
+.learn-en {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--text);
+}
+.answer.sentence {
+  font-size: 1.5rem;
+  line-height: 1.35;
+}
+
 .example {
   background: var(--surface-2);
   border-radius: var(--radius-sm);

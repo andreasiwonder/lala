@@ -17,6 +17,7 @@
  * @property {Deck} deck
  * @property {Map<string, Entry>} index
  * @property {(card: Card, rating: Rating) => Promise<Card>} rate
+ * @property {(card: Card) => Promise<Card>} introduce
  * @property {(hash: string) => void} navigate
  */
 import { signal, effect } from './lib/reactive.mjs';
@@ -75,6 +76,29 @@ export async function createApp() {
     return next;
   }
 
+  /**
+   * Introduce a new word: move it new → learning (due now) so it enters the
+   * spaced-repetition review pipeline. Called by the Learn view after the word
+   * has been *shown* to the learner. Idempotent.
+   * @param {Card} card
+   * @returns {Promise<Card>}
+   */
+  async function introduce(card) {
+    if (card.state !== 'new') return card;
+    const t = Date.now();
+    const next = { ...card, state: /** @type {const} */ ('learning'), learningStepIndex: 0, intervalDays: 0, due: t, updatedAt: t };
+    await db.saveCard(next);
+    await db.logReview({ entryId: card.entryId, rating: 'introduce', ts: t, prevState: 'new', newState: 'learning' });
+    cards.update((list) => list.map((c) => (c.entryId === next.entryId ? next : c)));
+
+    const today = dayKey(t);
+    const cur = load();
+    const streak = advanceStreak({ lastStudyDay: cur.lastStudyDay, streak: cur.streak }, today);
+    const count = cur.newToday.day === today ? cur.newToday.count + 1 : 1;
+    settings.set(update({ lastStudyDay: streak.lastStudyDay, streak: streak.streak, newToday: { day: today, count } }));
+    return next;
+  }
+
   /** @type {AppContext} */
   const ctx = {
     settings,
@@ -82,6 +106,7 @@ export async function createApp() {
     deck,
     index,
     rate,
+    introduce,
     navigate: (hash) => {
       location.hash = hash;
     },

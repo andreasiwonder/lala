@@ -88,8 +88,15 @@ export function ChatView(ctx) {
         if (t) send(t);
       },
       onEnd: () => {
-        // Fired after every listen. If no final transcript arrived, go idle.
-        if (phase.peek() === 'listening') phase.set('idle');
+        // Fired when listening stops (silence, tap, or timeout). If onFinal
+        // already fired, phase is 'thinking' — do nothing. Otherwise SALVAGE:
+        // many browsers end without promoting the interim transcript to a
+        // final result, so send whatever we heard rather than dropping it.
+        if (phase.peek() !== 'listening') return;
+        const pending = interim.peek().trim();
+        interim.set('');
+        if (pending) send(pending);
+        else phase.set('idle');
       },
       onError: (err) => {
         interim.set('');

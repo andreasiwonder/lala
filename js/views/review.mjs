@@ -13,8 +13,6 @@
  */
 import { el, render, signal, effect } from '../lib/reactive.mjs';
 import { buildQueue } from '../srs/queue.mjs';
-import { newRemaining } from '../store/settings.mjs';
-import { dayKey } from '../lib/day.mjs';
 import { speak, hasTurkishVoice } from '../audio/tts.mjs';
 
 /** @type {Array<[Rating, string, string]>} label + key hint */
@@ -32,12 +30,13 @@ const RATINGS = [
 export function ReviewView(ctx) {
   const root = el('section.view.review');
   const now0 = Date.now();
-  const remaining = newRemaining(ctx.settings.peek(), dayKey(now0));
+  // Review tests only cards you've already been shown in Learn — new words are
+  // introduced there, not here — so no new cards enter the review queue.
   const { queue } = buildQueue({
     cards: ctx.cards.peek(),
     entryById: ctx.index,
     now: now0,
-    newRemaining: remaining,
+    newRemaining: 0,
   });
 
   const session = signal({ order: queue.map((c) => c.entryId), pos: 0, answered: 0 });

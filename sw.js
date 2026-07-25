@@ -2,7 +2,7 @@
    network-first (so new code loads when online, cache when offline). The
    Anthropic API (Phase 2) is always bypassed — never cached. */
 
-const CACHE = 'konus-v3';
+const CACHE = 'konus-v4';
 
 const ASSETS = [
   './',
@@ -34,6 +34,7 @@ const ASSETS = [
   'js/ai/helpers.mjs',
   'js/views/onboarding.mjs',
   'js/views/dashboard.mjs',
+  'js/views/learn.mjs',
   'js/views/review.mjs',
   'js/views/settings.mjs',
   'js/views/chat.mjs',

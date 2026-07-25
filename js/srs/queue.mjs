@@ -46,6 +46,21 @@ export function buildQueue({ cards, entryById, now, newRemaining }) {
 }
 
 /**
+ * The next batch of not-yet-seen words, most-common first — used by the Learn
+ * view to present new vocabulary before it enters review.
+ * @param {Card[]} cards
+ * @param {Map<string, Entry>} entryById
+ * @param {number} limit
+ * @returns {Card[]}
+ */
+export function newBatch(cards, entryById, limit) {
+  return cards
+    .filter((c) => c.state === 'new')
+    .sort((a, b) => freqRank(entryById, a) - freqRank(entryById, b))
+    .slice(0, Math.max(0, limit));
+}
+
+/**
  * Snapshot counts for the progress screen.
  * @param {Card[]} cards
  * @param {number} now epoch ms

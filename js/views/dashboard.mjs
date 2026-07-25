@@ -7,7 +7,7 @@
  * @typedef {import('../app.mjs').AppContext} AppContext
  */
 import { el, render, effect } from '../lib/reactive.mjs';
-import { buildQueue, summarize } from '../srs/queue.mjs';
+import { buildQueue, summarize, newBatch } from '../srs/queue.mjs';
 import { newRemaining } from '../store/settings.mjs';
 import { dayKey } from '../lib/day.mjs';
 
@@ -24,11 +24,11 @@ export function DashboardView(ctx) {
     const now = Date.now();
     const today = dayKey(now);
     const remaining = newRemaining(settings, today);
-    const { counts } = buildQueue({ cards, entryById: ctx.index, now, newRemaining: remaining });
+    // Review counts exclude new words — those are introduced in Learn.
+    const { counts } = buildQueue({ cards, entryById: ctx.index, now, newRemaining: 0 });
     const summary = summarize(cards, now);
-
-    const dueTotal = counts.total;
-    const startLabel = dueTotal > 0 ? `Study ${dueTotal} card${dueTotal === 1 ? '' : 's'}` : 'All caught up 🎉';
+    const toLearn = newBatch(cards, ctx.index, remaining).length;
+    const dueTotal = counts.review + counts.learning;
 
     render(
       root,
@@ -47,19 +47,22 @@ export function DashboardView(ctx) {
         el(
           'div.counts',
           null,
-          countPill(counts.review + counts.learning, 'due'),
-          countPill(counts.new, 'new'),
+          countPill(toLearn, 'to learn'),
+          countPill(dueTotal, 'to review'),
           countPill(summary.learned, 'learned'),
         ),
-        el(
-          'button.primary.big',
-          { disabled: dueTotal === 0, onclick: () => ctx.navigate('#/review') },
-          startLabel,
-        ),
-        dueTotal === 0
-          ? el('p.muted', null, 'Nothing due right now. Come back later, or raise your daily pace in Settings.')
+        toLearn > 0
+          ? el('button.primary.big', { onclick: () => ctx.navigate('#/learn') }, `🌱 Learn ${toLearn} new word${toLearn === 1 ? '' : 's'}`)
           : null,
+        el(
+          `button.big.${dueTotal > 0 ? 'primary' : 'secondary'}`,
+          { disabled: dueTotal === 0, onclick: () => ctx.navigate('#/review') },
+          dueTotal > 0 ? `🔁 Review ${dueTotal} card${dueTotal === 1 ? '' : 's'}` : '🔁 Nothing to review yet',
+        ),
         el('button.secondary.big', { onclick: () => ctx.navigate('#/chat') }, '💬 Practice speaking'),
+        toLearn === 0 && dueTotal === 0
+          ? el('p.muted', null, 'All caught up 🎉 Raise your daily pace in Settings to learn more today.')
+          : null,
       ),
       progressCard(ctx),
     );
