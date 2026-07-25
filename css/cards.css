@@ -76,7 +76,18 @@
   letter-spacing: -0.01em;
 }
 
-/* Learn (presentation) view */
+/* Learn (presentation) view + coverflow filmstrip */
+.learn-view {
+  gap: 12px;
+}
+.learn-body {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+.learn-footer {
+  padding-top: 4px;
+}
 .learn-en {
   font-size: 1.25rem;
   font-weight: 500;
@@ -85,6 +96,40 @@
 .answer.sentence {
   font-size: 1.5rem;
   line-height: 1.35;
+}
+
+.filmstrip {
+  position: relative;
+  display: flex;
+  gap: 14px;
+  width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 12px 11%;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.filmstrip::-webkit-scrollbar {
+  display: none;
+}
+.strip-card {
+  flex: 0 0 78%;
+  scroll-snap-align: center;
+  transform: scale(0.84);
+  opacity: 0.4;
+  filter: grayscale(0.25);
+  transition: transform 0.28s ease, opacity 0.28s ease, filter 0.28s ease;
+  cursor: pointer;
+}
+.strip-card.is-active {
+  transform: scale(1);
+  opacity: 1;
+  filter: none;
+  cursor: default;
+}
+.strip-card .flashcard {
+  min-height: 260px;
+  width: 100%;
 }
 
 .example {
