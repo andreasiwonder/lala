@@ -14,7 +14,7 @@
  */
 
 export const meta = {
-  version: '2026.07.0',
+  version: '2026.07.1',
   language: { code: 'tr', name: 'Turkish' },
 };
 
