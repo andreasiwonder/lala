@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Konuş">
+  <rect width="512" height="512" rx="112" fill="#0f766e"/>
+  <rect x="100" y="128" width="312" height="184" rx="40" fill="#ffffff"/>
+  <path d="M168 300 L150 358 L214 300 Z" fill="#ffffff"/>
+  <!-- Turkish crescent: teal disc carved by a bubble-white disc -->
+  <circle cx="250" cy="232" r="52" fill="#0f766e"/>
+  <circle cx="272" cy="224" r="42" fill="#ffffff"/>
+  <!-- five-point star -->
+  <path d="M300 214 L305.6 230.2 L322.8 230.6 L309.1 241 L314.1 257.4 L300 247.6 L285.9 257.4 L290.9 241 L277.2 230.6 L294.4 230.2 Z" fill="#0f766e"/>
+</svg>

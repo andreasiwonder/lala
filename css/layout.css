@@ -1,366 +1,224 @@
-/* ==========================================================================
-   layout.css — page structure, hero, tiles, cards
-   ========================================================================== */
+/* App frame, top bars, and shared primitives (buttons, fields, pills, bars). */
 
-*, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
-body { margin: 0; min-height: 100vh; line-height: 1.5; }
-
-.wrap {
-  max-width: 1120px;
+.app {
+  max-width: 560px;
   margin: 0 auto;
-  padding: clamp(16px, 3vw, 32px);
-  padding-bottom: 64px;
+  padding: env(safe-area-inset-top) 16px calc(24px + env(safe-area-inset-bottom));
+  min-height: 100dvh;
 }
 
-/* --- Skip link ----------------------------------------------------------- */
-.skip {
-  position: absolute; left: -9999px;
-  background: var(--card); color: var(--ink);
-  padding: 10px 16px; border-radius: 8px; z-index: 100;
-}
-.skip:focus { left: 16px; top: 16px; }
-
-/* --- Header -------------------------------------------------------------- */
-.masthead {
-  display: flex; flex-wrap: wrap; gap: 8px 16px;
-  align-items: baseline; justify-content: space-between;
-  margin-bottom: clamp(20px, 4vw, 36px);
-}
-.masthead h1 {
-  font-size: clamp(19px, 2.4vw, 24px);
-  font-weight: 650; letter-spacing: -0.02em; margin: 0;
-}
-.masthead .sub { color: var(--sky-ink-2); font-size: 14px; margin: 2px 0 0; }
-.masthead time { color: var(--sky-ink-2); font-size: 14px; font-variant-numeric: tabular-nums; }
-.masthead-tools { display: flex; align-items: center; gap: 8px; }
-.compass-toggle { display: none; }
-
-/* ==========================================================================
-   Hero — current conditions. Sits directly on the sky, so it uses the glass
-   treatment and sky ink (NOT card ink).
-   ========================================================================== */
-
-.hero {
-  background: var(--sky-glass);
-  border: 1px solid var(--sky-glass-line);
-  border-radius: var(--radius-lg);
-  backdrop-filter: blur(14px) saturate(1.2);
-  -webkit-backdrop-filter: blur(14px) saturate(1.2);
-  padding: clamp(20px, 3.5vw, 34px);
-  margin-bottom: 20px;
-  transition: background .8s ease, border-color .8s ease;
+.view {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 12px;
 }
 
-.hero-top {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: clamp(16px, 3vw, 40px);
+.topbar {
+  display: flex;
   align-items: center;
+  gap: 12px;
+  min-height: 44px;
 }
 
-.wind-figure { display: flex; align-items: baseline; gap: 10px; }
-.wind-figure .value {
-  font-size: clamp(64px, 15vw, 132px);
-  font-weight: 300;
-  line-height: .85;
-  letter-spacing: -0.05em;
-  font-variant-numeric: lining-nums;
-}
-.wind-figure .unit {
-  font-size: clamp(18px, 3vw, 26px);
-  font-weight: 500;
-  color: var(--sky-ink-2);
-}
-.wind-meta {
-  margin-top: 12px;
-  font-size: clamp(14px, 1.9vw, 16px);
-  color: var(--sky-ink-2);
-  display: flex; flex-wrap: wrap; gap: 6px 18px;
-}
-.wind-meta b { font-weight: 600; color: var(--sky-ink); font-variant-numeric: tabular-nums; }
-
-/* Compass */
-.compass { width: clamp(104px, 20vw, 148px); height: clamp(104px, 20vw, 148px); flex: none; }
-.compass .ring   { fill: none; stroke: var(--sky-ink); opacity: .18; stroke-width: 1.5; }
-.compass .tick   { stroke: var(--sky-ink); opacity: .3; stroke-width: 1.5; }
-.compass .card-l { fill: var(--sky-ink); opacity: .55; font-size: 11px; font-weight: 600; text-anchor: middle; }
-/* No transform-origin here: the rotate() attribute set in main.js already
-   carries its own centre — `rotate(deg 50 50)`. Adding transform-origin makes
-   the browser apply that offset a SECOND time, rotating the arrow about the
-   viewBox corner and flinging it off-canvas. */
-.compass .arrow  { fill: var(--accent); transition: transform .9s cubic-bezier(.22,1,.36,1); }
-.compass .dirtext { fill: var(--sky-ink); font-size: 15px; font-weight: 650; text-anchor: middle; }
-
-/* Device heading is a mobile-only, opt-in enhancement. It is kept separate
-   from the weather compass above: one points north, the other describes wind. */
-.phone-compass { display: none; }
-
-/* --- Verdict badge — status colour ALWAYS with icon + text ---------------- */
-.verdict {
-  display: inline-flex; align-items: center; gap: 10px;
-  margin-top: 22px; padding: 10px 16px 10px 12px;
-  border-radius: 999px;
-  background: var(--card);
-  border: 1px solid var(--hairline);
-  color: var(--ink);
-  box-shadow: var(--shadow);
-}
-.verdict .dot { width: 12px; height: 12px; border-radius: 50%; flex: none; background: var(--verdict-color, var(--good)); }
-.verdict .icon { width: 18px; height: 18px; flex: none; color: var(--verdict-color, var(--good)); }
-.verdict .label { font-weight: 650; font-size: 15px; }
-.verdict .detail { color: var(--ink-2); font-size: 14px; }
-
-.hero-warnings { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
-.warn {
-  display: flex; align-items: flex-start; gap: 8px;
-  font-size: 14px; color: var(--ink); background: var(--card);
-  border: 1px solid var(--hairline); border-left: 3px solid var(--warn-color, var(--warning));
-  border-radius: 8px; padding: 8px 12px; box-shadow: var(--shadow);
-}
-.warn svg { width: 16px; height: 16px; flex: none; margin-top: 2px; color: var(--warn-color, var(--warning)); }
-
-/* --- Secondary stat strip ------------------------------------------------ */
-.strip {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
-  gap: 1px;
-  margin-top: 24px;
-  border-top: 1px solid var(--sky-glass-line);
-  padding-top: 18px;
-}
-.strip .cell .k {
-  font-size: 11px; text-transform: uppercase; letter-spacing: .07em;
-  color: var(--sky-ink-2); font-weight: 600;
-}
-.strip .cell .v {
-  font-size: clamp(18px, 2.6vw, 22px); font-weight: 550; margin-top: 3px;
-}
-.strip .cell .v small { font-size: 13px; font-weight: 500; color: var(--sky-ink-2); }
-
-/* ==========================================================================
-   Cards — the stable substrate everything measured lives on
-   ========================================================================== */
-
-.card {
-  background: var(--card);
-  color: var(--ink);
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: clamp(16px, 2.4vw, 22px);
-  margin-bottom: 20px;
-  transition: background .8s ease, color .8s ease;
-}
-.card > h2 {
-  font-size: 15px; font-weight: 650; margin: 0 0 2px;
+.topbar h1 {
   letter-spacing: -0.01em;
 }
-.card > .note { font-size: 13px; color: var(--ink-2); margin: 0 0 16px; }
-.card > .note:last-child { margin-bottom: 0; }
 
-/* --- 3-day tiles --------------------------------------------------------- */
-.days { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
-.day {
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius);
+.spacer,
+.grow {
+  flex: 1;
+}
+
+/* Buttons ----------------------------------------------------------------- */
+
+.primary {
+  background: var(--teal);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  padding: 12px 18px;
+  font-weight: 600;
+  transition: transform 0.05s ease, background 0.15s ease;
+}
+.primary:hover {
+  background: var(--teal-600);
+}
+.primary:active {
+  transform: translateY(1px);
+}
+.primary:disabled {
+  background: var(--surface-2);
+  color: var(--muted);
+  cursor: default;
+}
+
+.big {
+  width: 100%;
   padding: 16px;
-  background: var(--card-2);
-  display: flex; flex-direction: column; gap: 10px;
-}
-.day .dname { font-size: 13px; font-weight: 650; }
-.day .ddate { font-size: 12px; color: var(--ink-muted); font-weight: 500; }
-.day .drow { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.day .dwind { font-size: 30px; font-weight: 400; letter-spacing: -0.03em; }
-.day .dwind small { font-size: 13px; color: var(--ink-2); font-weight: 500; letter-spacing: 0; }
-.day .dgust { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
-.day .dmeta { display: flex; gap: 14px; font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
-.day .dverdict { display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; }
-.day .dverdict .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
-.day .icon-wx { width: 30px; height: 30px; color: var(--ink-2); flex: none; }
-
-/* ==========================================================================
-   Map
-   ========================================================================== */
-
-.map-head { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-.layers { display: flex; flex-wrap: wrap; gap: 6px; }
-.layers button {
-  font: inherit; font-size: 13px; font-weight: 550;
-  padding: 7px 13px; border-radius: 999px; cursor: pointer;
-  border: 1px solid var(--hairline);
-  background: var(--card-2); color: var(--ink-2);
-  transition: background .15s, color .15s, border-color .15s;
-}
-.layers button:hover { background: var(--card); color: var(--ink); }
-.layers button[aria-pressed="true"] {
-  background: var(--series-wind); border-color: var(--series-wind); color: #fff;
-}
-.layers button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-
-#map { height: clamp(300px, 52vw, 460px); border-radius: var(--radius); overflow: hidden; z-index: 0; }
-.leaflet-container { background: var(--card-2); font-family: var(--font); }
-
-.radar-bar { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
-.radar-bar button {
-  width: 38px; height: 38px; flex: none; border-radius: 50%; cursor: pointer;
-  border: 1px solid var(--hairline); background: var(--card-2); color: var(--ink);
-  display: grid; place-items: center;
-}
-.radar-bar .track { flex: 1; height: 4px; border-radius: 2px; background: var(--grid); position: relative; }
-.radar-bar .track .fill { position: absolute; inset: 0 auto 0 0; background: var(--series-wind); border-radius: 2px; }
-.radar-bar .tlabel { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; min-width: 92px; text-align: right; }
-
-.embed-wrap { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--hairline); }
-.embed-wrap iframe { display: block; width: 100%; height: clamp(320px, 50vw, 440px); border: 0; }
-
-/* ==========================================================================
-   Footer
-   ========================================================================== */
-
-.foot {
-  margin-top: 36px; padding-top: 20px;
-  border-top: 1px solid var(--sky-glass-line);
-  font-size: 13px; color: var(--sky-ink-2);
-}
-.foot a { color: inherit; text-underline-offset: 2px; }
-.foot p { margin: 0 0 6px; }
-
-/* --- States -------------------------------------------------------------- */
-.loading { color: var(--ink-2); font-size: 14px; padding: 20px 0; }
-.error {
-  color: var(--ink); font-size: 14px; padding: 14px 16px;
-  border: 1px solid var(--hairline); border-left: 3px solid var(--critical);
-  border-radius: 8px; background: var(--card-2);
-}
-[hidden] { display: none !important; }
-
-/* ==========================================================================
-   Mobile — this site is used on a phone at the dock, so touch targets and
-   thumb reach matter more than density.
-   ========================================================================== */
-
-@media (max-width: 640px) {
-  .wrap { padding-bottom: 40px; }
-
-  /* Wind figure and compass side by side rather than stacked: the compass is
-     small enough to sit next to the number, and it saves a full screen of
-     scrolling before the score. */
-  .hero-top { grid-template-columns: 1fr auto; align-items: center; }
-  .compass { width: 96px; height: 96px; }
-  .wind-figure .value { font-size: clamp(56px, 19vw, 84px); }
-
-  .phone-compass {
-    display: grid;
-    grid-template-columns: 1fr 82px;
-    grid-template-rows: auto auto;
-    gap: 10px 14px;
-    align-items: center;
-    margin-top: 18px;
-    padding: 14px;
-    border: 1px solid var(--sky-glass-line);
-    border-radius: 14px;
-    background: rgba(255, 255, 255, .12);
-  }
-  .phone-compass-readout { min-width: 0; }
-  .phone-compass-label {
-    display: block;
-    color: var(--sky-ink-2);
-    font-size: 11px;
-    font-weight: 650;
-    letter-spacing: .07em;
-    text-transform: uppercase;
-  }
-  .phone-compass-readout strong {
-    display: block;
-    margin-top: 2px;
-    font-size: 22px;
-    font-variant-numeric: tabular-nums;
-  }
-  .phone-compass-note {
-    display: block;
-    margin-top: 2px;
-    color: var(--sky-ink-2);
-    font-size: 12px;
-    line-height: 1.35;
-  }
-  .phone-compass-dial { width: 82px; height: 82px; grid-area: 1 / 2 / 3 / 3; }
-  .phone-compass-ring { fill: none; stroke: var(--sky-ink); stroke-width: 1.5; opacity: .22; }
-  #phone-compass-face { transform-origin: 50px 50px; transition: transform .16s linear; }
-  #phone-compass-face text {
-    fill: var(--sky-ink); font-size: 9px; font-weight: 700;
-    text-anchor: middle; dominant-baseline: middle;
-  }
-  .phone-compass-north { fill: #d03b3b; }
-  .phone-compass-south { fill: var(--sky-ink); opacity: .45; }
-  .phone-compass-bearing { fill: var(--sky-ink); opacity: .7; }
-  .phone-compass-hub { fill: var(--sky-ink); }
-  #phone-compass-enable {
-    justify-self: start;
-    min-height: 44px;
-    padding: 0 16px;
-    border: 1px solid var(--sky-glass-line);
-    border-radius: 999px;
-    background: var(--card);
-    color: var(--ink);
-    font: inherit;
-    font-size: 14px;
-    font-weight: 650;
-    cursor: pointer;
-  }
-  #phone-compass-enable:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  .phone-compass.is-active { grid-template-rows: auto; }
-  .phone-compass.is-active .phone-compass-dial { grid-row: 1; }
-  .phone-compass.is-active #phone-compass-enable { display: none; }
-
-  .masthead { margin-bottom: 16px; }
-  .masthead h1 { font-size: 18px; }
-  .masthead time { font-size: 12px; }
-  .masthead-tools { align-self: center; }
-  .compass-toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    min-height: 44px;
-    padding: 0 11px;
-    border: 1px solid var(--sky-glass-line);
-    border-radius: 999px;
-    background: var(--sky-glass);
-    color: var(--sky-ink);
-    font: inherit;
-    font-size: 12px;
-    font-weight: 650;
-    cursor: pointer;
-  }
-  .compass-toggle svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.6; }
-  .compass-toggle svg path { fill: var(--accent); stroke: none; }
-  .compass-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  .compass-toggle[aria-expanded="true"] { background: var(--card); color: var(--ink); }
-
-  .card { padding: 16px 14px; margin-bottom: 14px; }
-  .hero { padding: 18px 16px; }
-
-  /* Every interactive control clears the 44px touch-target floor. */
-  .layers button { min-height: 44px; padding: 0 16px; font-size: 14px; }
-  .radar-bar button { width: 44px; height: 44px; }
-  .sub-h select { min-height: 44px; padding: 8px 12px; }
-
-  /* Two columns read better than three cramped ones. */
-  .strip { grid-template-columns: repeat(2, 1fr); gap: 14px 12px; }
-  .days { grid-template-columns: 1fr; }
-
-  /* Full-bleed map: on a narrow screen the card padding wastes scarce width. */
-  #map { height: 300px; border-radius: 10px; }
-
-  .verdict { width: 100%; }
-  .verdict .detail { margin-left: auto; text-align: right; }
+  font-size: 1.05rem;
 }
 
-@media (max-width: 640px) and (prefers-reduced-motion: reduce) {
-  #phone-compass-face { transition: none; }
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+.icon:hover {
+  background: var(--surface-2);
+}
+.icon.speak {
+  color: var(--teal);
+}
+.icon.small {
+  width: 28px;
+  height: 28px;
+  font-size: 0.85rem;
 }
 
-@media (max-width: 380px) {
-  .hero-top { grid-template-columns: 1fr; }
-  .compass { justify-self: start; }
+.secondary {
+  background: var(--surface-2);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  padding: 12px 18px;
+  font-weight: 600;
+  transition: filter 0.15s ease;
+}
+.secondary:hover {
+  filter: brightness(0.97);
+}
+.secondary.big {
+  width: 100%;
+}
+
+.link {
+  color: var(--teal);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 4px 2px;
+}
+.link:hover {
+  text-decoration: underline;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.status {
+  font-size: 0.85rem;
+}
+.status.ok {
+  color: var(--good);
+}
+.status.err {
+  color: var(--again);
+}
+
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 0.9rem;
+}
+
+/* Fields ------------------------------------------------------------------ */
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.field > span {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+.field select,
+.field input {
+  padding: 11px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  width: 100%;
+}
+.field select:focus,
+.field input:focus {
+  outline: 2px solid var(--teal);
+  outline-offset: 1px;
+}
+
+/* Pills, chips, bars ------------------------------------------------------ */
+
+.counts {
+  display: flex;
+  gap: 10px;
+}
+.pill {
+  flex: 1;
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  text-align: center;
+}
+.pill-n {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.pill-l {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.chip {
+  background: var(--surface-2);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.bar {
+  height: 8px;
+  background: var(--surface-2);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  background: var(--teal);
+  border-radius: 999px;
+  transition: width 0.25s ease;
+}
+
+.unit-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+}
+.unit-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
 }

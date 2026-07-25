@@ -1,13 +1,20 @@
 {
-  "name": "alster-sailing-weather",
-  "version": "1.0.0",
+  "name": "konus",
+  "version": "0.1.0",
   "private": true,
-  "description": "Wind, rain and sailing conditions for the Außenalster in Hamburg",
   "type": "module",
+  "description": "Konuş — a fun, efficient PWA for learning conversational Turkish (English speakers).",
   "scripts": {
+    "dev": "python3 -m http.server 8000",
     "test": "node --test test/*.test.mjs",
-    "climatology": "node scripts/build-climatology.mjs",
-    "serve": "python3 -m http.server 8000"
+    "typecheck": "tsc --noEmit",
+    "build:deck": "node scripts/build-deck.mjs"
   },
-  "license": "MIT"
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "typescript": "^5.6.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
 }

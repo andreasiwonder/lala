@@ -1,0 +1,21 @@
+{
+  "name": "Konuş — Learn Conversational Turkish",
+  "short_name": "Konuş",
+  "description": "A fun, efficient way to learn to speak conversational Turkish.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f7f7f5",
+  "theme_color": "#0f766e",
+  "lang": "en",
+  "categories": ["education"],
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

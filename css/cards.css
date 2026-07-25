@@ -1,0 +1,135 @@
+/* Cards, the flashcard surface, and rating buttons. */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card.today .primary {
+  margin-top: 4px;
+}
+
+.card.center {
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  padding: 40px 18px;
+}
+
+.big-emoji {
+  font-size: 3rem;
+}
+
+/* Onboarding -------------------------------------------------------------- */
+
+.onboarding {
+  justify-content: center;
+  min-height: 80dvh;
+}
+.onboarding h1 {
+  font-size: 1.8rem;
+}
+
+/* Flashcard --------------------------------------------------------------- */
+
+.review {
+  gap: 12px;
+}
+
+.flashcard {
+  min-height: 300px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  padding: 32px 20px;
+}
+
+.kicker {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.prompt {
+  font-size: 1.9rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.answer-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.answer {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--teal);
+  letter-spacing: -0.01em;
+}
+
+.example {
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  width: 100%;
+}
+.example .tr {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.example .en {
+  font-size: 0.9rem;
+  margin-top: 2px;
+}
+.notes {
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* Rating buttons ---------------------------------------------------------- */
+
+.ratings {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  width: 100%;
+  margin-top: 4px;
+}
+.ratings button {
+  padding: 12px 4px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #fff;
+  transition: transform 0.05s ease, filter 0.15s ease;
+}
+.ratings button:active {
+  transform: translateY(1px);
+}
+.ratings button:hover {
+  filter: brightness(1.06);
+}
+.rate-again {
+  background: var(--again);
+}
+.rate-hard {
+  background: var(--hard);
+}
+.rate-good {
+  background: var(--good);
+}
+.rate-easy {
+  background: var(--easy);
+}

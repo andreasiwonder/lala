@@ -1,0 +1,238 @@
+/* Chat view: scenario picker, message bubbles, gloss bar, input. */
+
+.chat {
+  height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 24px);
+  gap: 10px;
+}
+
+.scenario-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.scenario {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 18px 12px;
+  font-weight: 600;
+  text-align: center;
+  transition: filter 0.15s ease, transform 0.05s ease;
+}
+.scenario:hover {
+  filter: brightness(0.97);
+}
+.scenario:active {
+  transform: translateY(1px);
+}
+
+/* Message list ------------------------------------------------------------ */
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 4px 2px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.msg {
+  display: flex;
+  flex-direction: column;
+  max-width: 85%;
+}
+.msg.user {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+.msg.assistant {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+.bubble {
+  padding: 10px 14px;
+  border-radius: 16px;
+  line-height: 1.45;
+  word-break: break-word;
+}
+.msg.user .bubble {
+  background: var(--teal);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+.msg.assistant .bubble {
+  background: var(--surface-2);
+  color: var(--text);
+  border-bottom-left-radius: 4px;
+}
+.bubble.err {
+  background: color-mix(in srgb, var(--again) 14%, var(--surface));
+  color: var(--again);
+  border: 1px solid var(--again);
+}
+
+.reply .word {
+  border-radius: 4px;
+  padding: 0 1px;
+  transition: background 0.1s ease;
+}
+.reply .word:hover {
+  background: color-mix(in srgb, var(--teal) 22%, transparent);
+}
+
+.typing {
+  letter-spacing: 2px;
+  opacity: 0.6;
+}
+
+.msg-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 2px;
+  padding-left: 4px;
+}
+.translation {
+  font-size: 0.85rem;
+  padding: 2px 6px;
+}
+.correction {
+  margin-top: 4px;
+  font-size: 0.9rem;
+  background: color-mix(in srgb, var(--hard) 12%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--hard) 40%, var(--border));
+  border-radius: var(--radius-sm);
+  padding: 4px 10px;
+  width: 100%;
+}
+.correction summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--hard);
+}
+.correction-body {
+  margin-top: 6px;
+  white-space: pre-wrap;
+}
+
+/* Gloss bar + input ------------------------------------------------------- */
+
+.gloss-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--teal);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+}
+.gloss-text {
+  flex: 1;
+  font-size: 0.95rem;
+}
+
+.input-bar {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+.chat-input {
+  flex: 1;
+  resize: none;
+  max-height: 120px;
+  padding: 11px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font-family: inherit;
+}
+.chat-input:focus {
+  outline: 2px solid var(--teal);
+  outline-offset: 1px;
+}
+.send {
+  padding: 11px 16px;
+}
+.input-wrap .input-bar {
+  align-items: center;
+}
+.mic-mini {
+  flex: 0 0 auto;
+}
+
+/* Voice mode -------------------------------------------------------------- */
+
+.voice-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0 4px;
+}
+
+.interim {
+  width: 100%;
+  text-align: center;
+  font-size: 1.05rem;
+  color: var(--teal);
+  min-height: 1.4em;
+}
+
+.mic {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  font-size: 2rem;
+  background: var(--teal);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+  transition: transform 0.06s ease, background 0.15s ease;
+}
+.mic:active {
+  transform: scale(0.96);
+}
+.mic:disabled {
+  background: var(--surface-2);
+  color: var(--muted);
+}
+.mic.listening {
+  background: var(--again);
+  animation: mic-pulse 1.3s ease-in-out infinite;
+}
+.mic.thinking {
+  background: var(--muted);
+}
+.mic.speaking {
+  background: var(--teal-600);
+}
+
+@keyframes mic-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--again) 55%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 14px color-mix(in srgb, var(--again) 0%, transparent);
+  }
+}
+
+.voice-label {
+  font-size: 0.9rem;
+  text-align: center;
+  min-height: 1.3em;
+}
+
+.topbar .icon.active {
+  color: var(--teal);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mic.listening {
+    animation: none;
+  }
+}

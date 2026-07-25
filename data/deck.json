@@ -1,0 +1,3262 @@
+{
+  "schemaVersion": 1,
+  "version": "2026.07.0",
+  "language": {
+    "code": "tr",
+    "name": "Turkish"
+  },
+  "units": [
+    {
+      "id": "greetings",
+      "title": "Greetings & Politeness",
+      "order": 1,
+      "entryIds": [
+        "e_greetings_merhaba",
+        "e_greetings_selam",
+        "e_greetings_gunaydin",
+        "e_greetings_iyi-gunler",
+        "e_greetings_iyi-aksamlar",
+        "e_greetings_iyi-geceler",
+        "e_greetings_hosca-kal",
+        "e_greetings_gule-gule",
+        "e_greetings_gorusuruz",
+        "e_greetings_tesekkur-ederim",
+        "e_greetings_tesekkurler",
+        "e_greetings_sagol",
+        "e_greetings_rica-ederim",
+        "e_greetings_bir-sey-degil",
+        "e_greetings_lutfen",
+        "e_greetings_affedersiniz",
+        "e_greetings_pardon",
+        "e_greetings_ozur-dilerim",
+        "e_greetings_nasilsin",
+        "e_greetings_nasilsiniz",
+        "e_greetings_iyiyim",
+        "e_greetings_memnun-oldum"
+      ]
+    },
+    {
+      "id": "essentials",
+      "title": "Everyday Essentials",
+      "order": 2,
+      "entryIds": [
+        "e_essentials_evet",
+        "e_essentials_hayir",
+        "e_essentials_tamam",
+        "e_essentials_belki",
+        "e_essentials_tabii",
+        "e_essentials_ve",
+        "e_essentials_ama",
+        "e_essentials_cok",
+        "e_essentials_biraz",
+        "e_essentials_var",
+        "e_essentials_yok",
+        "e_essentials_bu",
+        "e_essentials_su",
+        "e_essentials_burada",
+        "e_essentials_orada",
+        "e_essentials_simdi",
+        "e_essentials_sonra",
+        "e_essentials_bugun",
+        "e_essentials_yarin",
+        "e_essentials_dun"
+      ]
+    },
+    {
+      "id": "people",
+      "title": "People & Pronouns",
+      "order": 3,
+      "entryIds": [
+        "e_people_ben",
+        "e_people_sen",
+        "e_people_siz",
+        "e_people_biz",
+        "e_people_onlar",
+        "e_people_benim-adim",
+        "e_people_adin-ne",
+        "e_people_anne",
+        "e_people_baba",
+        "e_people_arkadas",
+        "e_people_cocuk",
+        "e_people_kadin",
+        "e_people_adam"
+      ]
+    },
+    {
+      "id": "questions",
+      "title": "Asking Questions",
+      "order": 4,
+      "entryIds": [
+        "e_questions_ne",
+        "e_questions_kim",
+        "e_questions_nerede",
+        "e_questions_ne-zaman",
+        "e_questions_neden",
+        "e_questions_nasil",
+        "e_questions_kac",
+        "e_questions_ne-kadar",
+        "e_questions_hangi",
+        "e_questions_ne-demek",
+        "e_questions_anlamadim",
+        "e_questions_tekrar-eder-misiniz",
+        "e_questions_yavas-konusur-musunuz",
+        "e_questions_ingilizce-biliyor-musunuz",
+        "e_questions_turkce-bilmiyorum"
+      ]
+    },
+    {
+      "id": "food",
+      "title": "Food & Café",
+      "order": 5,
+      "entryIds": [
+        "e_food_su",
+        "e_food_cay",
+        "e_food_kahve",
+        "e_food_ekmek",
+        "e_food_yemek",
+        "e_food_kahvalti",
+        "e_food_hesap",
+        "e_food_menu",
+        "e_food_istiyorum",
+        "e_food_bir-cay-lutfen",
+        "e_food_hesap-lutfen",
+        "e_food_afiyet-olsun",
+        "e_food_ac",
+        "e_food_susadim",
+        "e_food_lezzetli"
+      ]
+    },
+    {
+      "id": "numbers",
+      "title": "Numbers & Time",
+      "order": 6,
+      "entryIds": [
+        "e_numbers_bir",
+        "e_numbers_iki",
+        "e_numbers_uc",
+        "e_numbers_dort",
+        "e_numbers_bes",
+        "e_numbers_alti",
+        "e_numbers_yedi",
+        "e_numbers_sekiz",
+        "e_numbers_dokuz",
+        "e_numbers_on",
+        "e_numbers_saat",
+        "e_numbers_saat-kac",
+        "e_numbers_dakika",
+        "e_numbers_gun",
+        "e_numbers_hafta"
+      ]
+    },
+    {
+      "id": "around",
+      "title": "Getting Around",
+      "order": 7,
+      "entryIds": [
+        "e_around_tuvalet",
+        "e_around_tuvalet-nerede",
+        "e_around_sol",
+        "e_around_sag",
+        "e_around_duz",
+        "e_around_yakin",
+        "e_around_uzak",
+        "e_around_otobus",
+        "e_around_taksi",
+        "e_around_otel",
+        "e_around_bilet",
+        "e_around_ne-kadar-tutar",
+        "e_around_kayboldum"
+      ]
+    },
+    {
+      "id": "feelings",
+      "title": "Feelings & Small Talk",
+      "order": 8,
+      "entryIds": [
+        "e_feelings_iyi",
+        "e_feelings_kotu",
+        "e_feelings_guzel",
+        "e_feelings_mutlu",
+        "e_feelings_yorgun",
+        "e_feelings_hasta",
+        "e_feelings_harika",
+        "e_feelings_nereli-siniz",
+        "e_feelings_turkce",
+        "e_feelings_ingilizce",
+        "e_feelings_cok-guzel",
+        "e_feelings_gercekten-mi"
+      ]
+    },
+    {
+      "id": "verbs",
+      "title": "Core Verbs & Useful Chunks",
+      "order": 9,
+      "entryIds": [
+        "e_verbs_gitmek",
+        "e_verbs_gelmek",
+        "e_verbs_icmek",
+        "e_verbs_yapmak",
+        "e_verbs_gormek",
+        "e_verbs_bilmek",
+        "e_verbs_konusmak",
+        "e_verbs_anlamak",
+        "e_verbs_biliyorum",
+        "e_verbs_bilmiyorum",
+        "e_verbs_var-mi",
+        "e_verbs_yardim-eder-misiniz"
+      ]
+    }
+  ],
+  "entries": [
+    {
+      "id": "e_greetings_merhaba",
+      "tr": "merhaba",
+      "en": "hello",
+      "pos": "interjection",
+      "type": "word",
+      "freqRank": 1,
+      "difficulty": 1,
+      "tags": [
+        "greeting",
+        "a1"
+      ],
+      "unitId": "greetings",
+      "examples": [
+        {
+          "tr": "Merhaba, nasılsın?",
+          "en": "Hello, how are you?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_greetings_selam",
+      "tr": "selam",
+      "en": "hi",
+      "pos": "interjection",
+      "type": "word",
+      "freqRank": 2,
+      "difficulty": 1,
+      "tags": [
+        "greeting",
+        "informal"
+      ],
+      "unitId": "greetings",
+      "examples": [
+        {
+          "tr": "Selam! Ne haber?",
+          "en": "Hi! What’s up?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_greetings_gunaydin",
+      "tr": "günaydın",
+      "en": "good morning",
+      "pos": "interjection",
+      "type": "word",
+      "freqRank": 3,
+      "difficulty": 1,
+      "tags": [
+        "greeting"
+      ],
+      "unitId": "greetings",
+      "examples": [
+        {
+          "tr": "Günaydın! İyi uyudun mu?",
+          "en": "Good morning! Did you sleep well?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_greetings_iyi-gunler",
+      "tr": "iyi günler",
+      "en": "good day / hello",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 4,
+      "difficulty": 1,
+      "tags": [
+        "greeting"
+      ],
+      "unitId": "greetings",
+      "examples": [
+        {
+          "tr": "İyi günler efendim.",
+          "en": "Good day, sir/madam.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_greetings_iyi-aksamlar",
+      "tr": "iyi akşamlar",
+      "en": "good evening",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 5,
+      "difficulty": 1,
+      "tags": [
+        "greeting"
+      ],
+      "unitId": "greetings",
+      "examples": [
+        {
+          "tr": "İyi akşamlar, hoş geldiniz.",
+          "en": "Good evening, welcome.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_greetings_iyi-geceler",
+      "tr": "iyi geceler",
+      "en": "good night",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 6,
+      "difficulty": 1,
+      "tags": [
+        "greeting"
+      ],
+      "unitId": "greetings",
+      "examples": [
+        {
+          "tr": "İyi geceler, yarın görüşürüz.",
+          "en": "Good night, see you tomorrow.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_greetings_hosca-kal",
+      "tr": "hoşça kal",
+      "en": "goodbye (to person staying)",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 7,
+      "difficulty": 1,
+      "tags": [
+        "greeting"
+      ],
+      "unitId": "greetings",
+      "examples": [
+        {
+          "tr": "Hoşça kal, kendine iyi bak.",
+          "en": "Goodbye, take care.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": "Said by the person leaving."
+    },
+    {
+      "id": "e_greetings_gule-gule",
+      "tr": "güle güle",
+      "en": "goodbye (to person leaving)",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 8,
+      "difficulty": 1,
+      "tags": [
+        "greeting"
+      ],
+      "unitId": "greetings",
+      "examples": [
+        {
+          "tr": "Güle güle, yine bekleriz.",
+          "en": "Goodbye, come again.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": "Said by the person staying."
+    },
+    {
+      "id": "e_greetings_gorusuruz",
+      "tr": "görüşürüz",
+      "en": "see you",
+      "pos": "interjection",
+      "type": "chunk",
+      "freqRank": 9,
+      "difficulty": 1,
+      "tags": [
+        "greeting"
+      ],
+      "unitId": "greetings",
+      "examples": [
+        {
+          "tr": "Görüşürüz, iyi günler!",
+          "en": "See you, have a nice day!",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_greetings_tesekkur-ederim",
+      "tr": "teşekkür ederim",
+      "en": "thank you",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 10,
+      "difficulty": 1,
+      "tags": [
+        "politeness",
+        "a1"
+      ],
+      "unitId": "greetings",
+      "examples": [
+        {
+          "tr": "Yardımın için teşekkür ederim.",
+          "en": "Thank you for your help.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_greetings_tesekkurler",
+      "tr": "teşekkürler",
+      "en": "thanks",
+      "pos": "interjection",
+      "type": "word",
+      "freqRank": 11,
+      "difficulty": 1,
+      "tags": [
+        "politeness"
+      ],
+      "unitId": "greetings",
+      "examples": [
+        {
+          "tr": "Çok teşekkürler!",
+          "en": "Thanks a lot!",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_greetings_sagol",
+      "tr": "sağ ol",
+      "en": "thanks (informal)",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 12,
+      "difficulty": 1,
+      "tags": [
+        "politeness",
+        "informal"
+      ],
+      "unitId": "greetings",
+      "examples": [
+        {
+          "tr": "Sağ ol dostum.",
+          "en": "Thanks, buddy.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_greetings_rica-ederim",
+      "tr": "rica ederim",
+      "en": "you’re welcome",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 13,
+      "difficulty": 1,
+      "tags": [
+        "politeness"
+      ],
+      "unitId": "greetings",
+      "examples": [
+        {
+          "tr": "Rica ederim, ne demek.",
+          "en": "You’re welcome, don’t mention it.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_greetings_bir-sey-degil",
+      "tr": "bir şey değil",
+      "en": "you’re welcome / it’s nothing",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 14,
+      "difficulty": 1,
+      "tags": [
+        "politeness"
+      ],
+      "unitId": "greetings",
+      "examples": [
+        {
+          "tr": "Teşekkürler! — Bir şey değil.",
+          "en": "Thanks! — It’s nothing.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_greetings_lutfen",
+      "tr": "lütfen",
+      "en": "please",
+      "pos": "adverb",
+      "type": "word",
+      "freqRank": 15,
+      "difficulty": 1,
+      "tags": [
+        "politeness",
+        "a1"
+      ],
+      "unitId": "greetings",
+      "examples": [
+        {
+          "tr": "Bir su, lütfen.",
+          "en": "A water, please.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_greetings_affedersiniz",
+      "tr": "affedersiniz",
+      "en": "excuse me (formal)",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 16,
+      "difficulty": 1,
+      "tags": [
+        "politeness"
+      ],
+      "unitId": "greetings",
+      "examples": [
+        {
+          "tr": "Affedersiniz, saat kaç?",
+          "en": "Excuse me, what time is it?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_greetings_pardon",
+      "tr": "pardon",
+      "en": "sorry / excuse me",
+      "pos": "interjection",
+      "type": "word",
+      "freqRank": 17,
+      "difficulty": 1,
+      "tags": [
+        "politeness"
+      ],
+      "unitId": "greetings",
+      "examples": [
+        {
+          "tr": "Pardon, geçebilir miyim?",
+          "en": "Excuse me, may I pass?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_greetings_ozur-dilerim",
+      "tr": "özür dilerim",
+      "en": "I’m sorry",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 18,
+      "difficulty": 1,
+      "tags": [
+        "politeness"
+      ],
+      "unitId": "greetings",
+      "examples": [
+        {
+          "tr": "Geciktim, özür dilerim.",
+          "en": "I’m late, I’m sorry.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_greetings_nasilsin",
+      "tr": "nasılsın?",
+      "en": "how are you? (informal)",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 19,
+      "difficulty": 1,
+      "tags": [
+        "smalltalk",
+        "a1"
+      ],
+      "unitId": "greetings",
+      "examples": [
+        {
+          "tr": "Merhaba, nasılsın?",
+          "en": "Hi, how are you?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_greetings_nasilsiniz",
+      "tr": "nasılsınız?",
+      "en": "how are you? (formal)",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 20,
+      "difficulty": 1,
+      "tags": [
+        "smalltalk"
+      ],
+      "unitId": "greetings",
+      "examples": [
+        {
+          "tr": "Hoş geldiniz, nasılsınız?",
+          "en": "Welcome, how are you?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_greetings_iyiyim",
+      "tr": "iyiyim",
+      "en": "I’m good",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 21,
+      "difficulty": 1,
+      "tags": [
+        "smalltalk"
+      ],
+      "unitId": "greetings",
+      "examples": [
+        {
+          "tr": "İyiyim, sen nasılsın?",
+          "en": "I’m good, how are you?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_greetings_memnun-oldum",
+      "tr": "memnun oldum",
+      "en": "nice to meet you",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 22,
+      "difficulty": 1,
+      "tags": [
+        "smalltalk"
+      ],
+      "unitId": "greetings",
+      "examples": [
+        {
+          "tr": "Ben Ali. — Memnun oldum!",
+          "en": "I’m Ali. — Nice to meet you!",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_essentials_evet",
+      "tr": "evet",
+      "en": "yes",
+      "pos": "adverb",
+      "type": "word",
+      "freqRank": 23,
+      "difficulty": 1,
+      "tags": [
+        "core",
+        "a1"
+      ],
+      "unitId": "essentials",
+      "examples": [
+        {
+          "tr": "Evet, doğru.",
+          "en": "Yes, that’s right.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_essentials_hayir",
+      "tr": "hayır",
+      "en": "no",
+      "pos": "adverb",
+      "type": "word",
+      "freqRank": 24,
+      "difficulty": 1,
+      "tags": [
+        "core",
+        "a1"
+      ],
+      "unitId": "essentials",
+      "examples": [
+        {
+          "tr": "Hayır, teşekkürler.",
+          "en": "No, thank you.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_essentials_tamam",
+      "tr": "tamam",
+      "en": "okay",
+      "pos": "adverb",
+      "type": "word",
+      "freqRank": 25,
+      "difficulty": 1,
+      "tags": [
+        "core"
+      ],
+      "unitId": "essentials",
+      "examples": [
+        {
+          "tr": "Tamam, anlaştık.",
+          "en": "Okay, agreed.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_essentials_belki",
+      "tr": "belki",
+      "en": "maybe",
+      "pos": "adverb",
+      "type": "word",
+      "freqRank": 26,
+      "difficulty": 1,
+      "tags": [
+        "core"
+      ],
+      "unitId": "essentials",
+      "examples": [
+        {
+          "tr": "Belki yarın gelirim.",
+          "en": "Maybe I’ll come tomorrow.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_essentials_tabii",
+      "tr": "tabii",
+      "en": "of course",
+      "pos": "adverb",
+      "type": "word",
+      "freqRank": 27,
+      "difficulty": 1,
+      "tags": [
+        "core"
+      ],
+      "unitId": "essentials",
+      "examples": [
+        {
+          "tr": "Tabii, memnuniyetle.",
+          "en": "Of course, with pleasure.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_essentials_ve",
+      "tr": "ve",
+      "en": "and",
+      "pos": "conjunction",
+      "type": "word",
+      "freqRank": 28,
+      "difficulty": 1,
+      "tags": [
+        "core"
+      ],
+      "unitId": "essentials",
+      "examples": [
+        {
+          "tr": "Çay ve kahve.",
+          "en": "Tea and coffee.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_essentials_ama",
+      "tr": "ama",
+      "en": "but",
+      "pos": "conjunction",
+      "type": "word",
+      "freqRank": 29,
+      "difficulty": 1,
+      "tags": [
+        "core"
+      ],
+      "unitId": "essentials",
+      "examples": [
+        {
+          "tr": "İstiyorum ama vaktim yok.",
+          "en": "I want to but I have no time.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_essentials_cok",
+      "tr": "çok",
+      "en": "very / a lot",
+      "pos": "adverb",
+      "type": "word",
+      "freqRank": 30,
+      "difficulty": 1,
+      "tags": [
+        "core",
+        "a1"
+      ],
+      "unitId": "essentials",
+      "examples": [
+        {
+          "tr": "Çok güzel!",
+          "en": "Very nice!",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_essentials_biraz",
+      "tr": "biraz",
+      "en": "a little",
+      "pos": "adverb",
+      "type": "word",
+      "freqRank": 31,
+      "difficulty": 1,
+      "tags": [
+        "core"
+      ],
+      "unitId": "essentials",
+      "examples": [
+        {
+          "tr": "Biraz Türkçe biliyorum.",
+          "en": "I know a little Turkish.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_essentials_var",
+      "tr": "var",
+      "en": "there is / to have",
+      "pos": "verb",
+      "type": "word",
+      "freqRank": 32,
+      "difficulty": 1,
+      "tags": [
+        "core",
+        "a1"
+      ],
+      "unitId": "essentials",
+      "examples": [
+        {
+          "tr": "Menü var mı?",
+          "en": "Is there a menu?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_essentials_yok",
+      "tr": "yok",
+      "en": "there isn’t / not have",
+      "pos": "verb",
+      "type": "word",
+      "freqRank": 33,
+      "difficulty": 1,
+      "tags": [
+        "core",
+        "a1"
+      ],
+      "unitId": "essentials",
+      "examples": [
+        {
+          "tr": "Vaktim yok.",
+          "en": "I have no time.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_essentials_bu",
+      "tr": "bu",
+      "en": "this",
+      "pos": "pronoun",
+      "type": "word",
+      "freqRank": 34,
+      "difficulty": 1,
+      "tags": [
+        "core"
+      ],
+      "unitId": "essentials",
+      "examples": [
+        {
+          "tr": "Bu ne?",
+          "en": "What is this?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_essentials_su",
+      "tr": "şu",
+      "en": "that",
+      "pos": "pronoun",
+      "type": "word",
+      "freqRank": 35,
+      "difficulty": 1,
+      "tags": [
+        "core"
+      ],
+      "unitId": "essentials",
+      "examples": [
+        {
+          "tr": "Şu ne kadar?",
+          "en": "How much is that?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_essentials_burada",
+      "tr": "burada",
+      "en": "here",
+      "pos": "adverb",
+      "type": "word",
+      "freqRank": 36,
+      "difficulty": 1,
+      "tags": [
+        "core"
+      ],
+      "unitId": "essentials",
+      "examples": [
+        {
+          "tr": "Otobüs burada durur.",
+          "en": "The bus stops here.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_essentials_orada",
+      "tr": "orada",
+      "en": "there",
+      "pos": "adverb",
+      "type": "word",
+      "freqRank": 37,
+      "difficulty": 1,
+      "tags": [
+        "core"
+      ],
+      "unitId": "essentials",
+      "examples": [
+        {
+          "tr": "Tuvalet orada.",
+          "en": "The toilet is there.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_essentials_simdi",
+      "tr": "şimdi",
+      "en": "now",
+      "pos": "adverb",
+      "type": "word",
+      "freqRank": 38,
+      "difficulty": 1,
+      "tags": [
+        "time"
+      ],
+      "unitId": "essentials",
+      "examples": [
+        {
+          "tr": "Şimdi gidiyorum.",
+          "en": "I’m going now.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_essentials_sonra",
+      "tr": "sonra",
+      "en": "later / after",
+      "pos": "adverb",
+      "type": "word",
+      "freqRank": 39,
+      "difficulty": 1,
+      "tags": [
+        "time"
+      ],
+      "unitId": "essentials",
+      "examples": [
+        {
+          "tr": "Sonra konuşuruz.",
+          "en": "We’ll talk later.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_essentials_bugun",
+      "tr": "bugün",
+      "en": "today",
+      "pos": "adverb",
+      "type": "word",
+      "freqRank": 40,
+      "difficulty": 1,
+      "tags": [
+        "time"
+      ],
+      "unitId": "essentials",
+      "examples": [
+        {
+          "tr": "Bugün çok yorgunum.",
+          "en": "I’m very tired today.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_essentials_yarin",
+      "tr": "yarın",
+      "en": "tomorrow",
+      "pos": "adverb",
+      "type": "word",
+      "freqRank": 41,
+      "difficulty": 1,
+      "tags": [
+        "time"
+      ],
+      "unitId": "essentials",
+      "examples": [
+        {
+          "tr": "Yarın görüşürüz.",
+          "en": "See you tomorrow.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_essentials_dun",
+      "tr": "dün",
+      "en": "yesterday",
+      "pos": "adverb",
+      "type": "word",
+      "freqRank": 42,
+      "difficulty": 1,
+      "tags": [
+        "time"
+      ],
+      "unitId": "essentials",
+      "examples": [
+        {
+          "tr": "Dün buradaydım.",
+          "en": "I was here yesterday.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_people_ben",
+      "tr": "ben",
+      "en": "I",
+      "pos": "pronoun",
+      "type": "word",
+      "freqRank": 43,
+      "difficulty": 1,
+      "tags": [
+        "pronoun",
+        "a1"
+      ],
+      "unitId": "people",
+      "examples": [
+        {
+          "tr": "Ben Ayşe.",
+          "en": "I’m Ayşe.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_people_sen",
+      "tr": "sen",
+      "en": "you (informal)",
+      "pos": "pronoun",
+      "type": "word",
+      "freqRank": 44,
+      "difficulty": 1,
+      "tags": [
+        "pronoun",
+        "a1"
+      ],
+      "unitId": "people",
+      "examples": [
+        {
+          "tr": "Sen nerelisin?",
+          "en": "Where are you from?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_people_siz",
+      "tr": "siz",
+      "en": "you (formal / plural)",
+      "pos": "pronoun",
+      "type": "word",
+      "freqRank": 45,
+      "difficulty": 1,
+      "tags": [
+        "pronoun"
+      ],
+      "unitId": "people",
+      "examples": [
+        {
+          "tr": "Siz nereden geliyorsunuz?",
+          "en": "Where are you coming from?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_people_biz",
+      "tr": "biz",
+      "en": "we",
+      "pos": "pronoun",
+      "type": "word",
+      "freqRank": 46,
+      "difficulty": 1,
+      "tags": [
+        "pronoun"
+      ],
+      "unitId": "people",
+      "examples": [
+        {
+          "tr": "Biz turistiz.",
+          "en": "We are tourists.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_people_onlar",
+      "tr": "onlar",
+      "en": "they",
+      "pos": "pronoun",
+      "type": "word",
+      "freqRank": 47,
+      "difficulty": 1,
+      "tags": [
+        "pronoun"
+      ],
+      "unitId": "people",
+      "examples": [
+        {
+          "tr": "Onlar arkadaşım.",
+          "en": "They are my friends.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_people_benim-adim",
+      "tr": "benim adım …",
+      "en": "my name is …",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 48,
+      "difficulty": 1,
+      "tags": [
+        "intro",
+        "a1"
+      ],
+      "unitId": "people",
+      "examples": [
+        {
+          "tr": "Benim adım Deniz.",
+          "en": "My name is Deniz.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_people_adin-ne",
+      "tr": "adın ne?",
+      "en": "what’s your name?",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 49,
+      "difficulty": 1,
+      "tags": [
+        "intro",
+        "a1"
+      ],
+      "unitId": "people",
+      "examples": [
+        {
+          "tr": "Merhaba, adın ne?",
+          "en": "Hi, what’s your name?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_people_anne",
+      "tr": "anne",
+      "en": "mother",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 50,
+      "difficulty": 1,
+      "tags": [
+        "family"
+      ],
+      "unitId": "people",
+      "examples": [
+        {
+          "tr": "Bu benim annem.",
+          "en": "This is my mother.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_people_baba",
+      "tr": "baba",
+      "en": "father",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 51,
+      "difficulty": 1,
+      "tags": [
+        "family"
+      ],
+      "unitId": "people",
+      "examples": [
+        {
+          "tr": "Babam doktor.",
+          "en": "My father is a doctor.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_people_arkadas",
+      "tr": "arkadaş",
+      "en": "friend",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 52,
+      "difficulty": 1,
+      "tags": [
+        "people"
+      ],
+      "unitId": "people",
+      "examples": [
+        {
+          "tr": "O benim arkadaşım.",
+          "en": "That’s my friend.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_people_cocuk",
+      "tr": "çocuk",
+      "en": "child",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 53,
+      "difficulty": 1,
+      "tags": [
+        "people"
+      ],
+      "unitId": "people",
+      "examples": [
+        {
+          "tr": "İki çocuğum var.",
+          "en": "I have two children.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_people_kadin",
+      "tr": "kadın",
+      "en": "woman",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 54,
+      "difficulty": 1,
+      "tags": [
+        "people"
+      ],
+      "unitId": "people",
+      "examples": [
+        {
+          "tr": "O kadın öğretmen.",
+          "en": "That woman is a teacher.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_people_adam",
+      "tr": "adam",
+      "en": "man",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 55,
+      "difficulty": 1,
+      "tags": [
+        "people"
+      ],
+      "unitId": "people",
+      "examples": [
+        {
+          "tr": "Bu adam kim?",
+          "en": "Who is this man?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_questions_ne",
+      "tr": "ne",
+      "en": "what",
+      "pos": "pronoun",
+      "type": "word",
+      "freqRank": 56,
+      "difficulty": 1,
+      "tags": [
+        "question",
+        "a1"
+      ],
+      "unitId": "questions",
+      "examples": [
+        {
+          "tr": "Bu ne?",
+          "en": "What is this?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_questions_kim",
+      "tr": "kim",
+      "en": "who",
+      "pos": "pronoun",
+      "type": "word",
+      "freqRank": 57,
+      "difficulty": 1,
+      "tags": [
+        "question"
+      ],
+      "unitId": "questions",
+      "examples": [
+        {
+          "tr": "O kim?",
+          "en": "Who is that?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_questions_nerede",
+      "tr": "nerede",
+      "en": "where",
+      "pos": "adverb",
+      "type": "word",
+      "freqRank": 58,
+      "difficulty": 1,
+      "tags": [
+        "question",
+        "a1"
+      ],
+      "unitId": "questions",
+      "examples": [
+        {
+          "tr": "Otel nerede?",
+          "en": "Where is the hotel?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_questions_ne-zaman",
+      "tr": "ne zaman",
+      "en": "when",
+      "pos": "adverb",
+      "type": "chunk",
+      "freqRank": 59,
+      "difficulty": 1,
+      "tags": [
+        "question"
+      ],
+      "unitId": "questions",
+      "examples": [
+        {
+          "tr": "Tren ne zaman gelir?",
+          "en": "When does the train come?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_questions_neden",
+      "tr": "neden",
+      "en": "why",
+      "pos": "adverb",
+      "type": "word",
+      "freqRank": 60,
+      "difficulty": 1,
+      "tags": [
+        "question"
+      ],
+      "unitId": "questions",
+      "examples": [
+        {
+          "tr": "Neden geç kaldın?",
+          "en": "Why are you late?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_questions_nasil",
+      "tr": "nasıl",
+      "en": "how",
+      "pos": "adverb",
+      "type": "word",
+      "freqRank": 61,
+      "difficulty": 1,
+      "tags": [
+        "question"
+      ],
+      "unitId": "questions",
+      "examples": [
+        {
+          "tr": "Bu nasıl çalışır?",
+          "en": "How does this work?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_questions_kac",
+      "tr": "kaç",
+      "en": "how many",
+      "pos": "adjective",
+      "type": "word",
+      "freqRank": 62,
+      "difficulty": 1,
+      "tags": [
+        "question"
+      ],
+      "unitId": "questions",
+      "examples": [
+        {
+          "tr": "Kaç yaşındasın?",
+          "en": "How old are you?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_questions_ne-kadar",
+      "tr": "ne kadar",
+      "en": "how much",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 63,
+      "difficulty": 1,
+      "tags": [
+        "question",
+        "shopping"
+      ],
+      "unitId": "questions",
+      "examples": [
+        {
+          "tr": "Bu ne kadar?",
+          "en": "How much is this?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_questions_hangi",
+      "tr": "hangi",
+      "en": "which",
+      "pos": "adjective",
+      "type": "word",
+      "freqRank": 64,
+      "difficulty": 1,
+      "tags": [
+        "question"
+      ],
+      "unitId": "questions",
+      "examples": [
+        {
+          "tr": "Hangi otobüs?",
+          "en": "Which bus?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_questions_ne-demek",
+      "tr": "ne demek?",
+      "en": "what does it mean?",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 65,
+      "difficulty": 1,
+      "tags": [
+        "question",
+        "learning"
+      ],
+      "unitId": "questions",
+      "examples": [
+        {
+          "tr": "“Yavaş” ne demek?",
+          "en": "What does “yavaş” mean?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_questions_anlamadim",
+      "tr": "anlamadım",
+      "en": "I didn’t understand",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 66,
+      "difficulty": 1,
+      "tags": [
+        "learning",
+        "a1"
+      ],
+      "unitId": "questions",
+      "examples": [
+        {
+          "tr": "Pardon, anlamadım.",
+          "en": "Sorry, I didn’t understand.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_questions_tekrar-eder-misiniz",
+      "tr": "tekrar eder misiniz?",
+      "en": "could you repeat that?",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 67,
+      "difficulty": 1,
+      "tags": [
+        "learning"
+      ],
+      "unitId": "questions",
+      "examples": [
+        {
+          "tr": "Tekrar eder misiniz, lütfen?",
+          "en": "Could you repeat that, please?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_questions_yavas-konusur-musunuz",
+      "tr": "yavaş konuşur musunuz?",
+      "en": "could you speak slowly?",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 68,
+      "difficulty": 1,
+      "tags": [
+        "learning"
+      ],
+      "unitId": "questions",
+      "examples": [
+        {
+          "tr": "Yavaş konuşur musunuz, lütfen?",
+          "en": "Could you speak slowly, please?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_questions_ingilizce-biliyor-musunuz",
+      "tr": "İngilizce biliyor musunuz?",
+      "en": "do you speak English?",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 69,
+      "difficulty": 1,
+      "tags": [
+        "learning",
+        "travel"
+      ],
+      "unitId": "questions",
+      "examples": [
+        {
+          "tr": "Affedersiniz, İngilizce biliyor musunuz?",
+          "en": "Excuse me, do you speak English?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_questions_turkce-bilmiyorum",
+      "tr": "Türkçe bilmiyorum",
+      "en": "I don’t speak Turkish",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 70,
+      "difficulty": 1,
+      "tags": [
+        "learning",
+        "travel"
+      ],
+      "unitId": "questions",
+      "examples": [
+        {
+          "tr": "Kusura bakmayın, Türkçe bilmiyorum.",
+          "en": "Sorry, I don’t speak Turkish.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_food_su",
+      "tr": "su",
+      "en": "water",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 71,
+      "difficulty": 1,
+      "tags": [
+        "food",
+        "a1"
+      ],
+      "unitId": "food",
+      "examples": [
+        {
+          "tr": "Bir su, lütfen.",
+          "en": "A water, please.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_food_cay",
+      "tr": "çay",
+      "en": "tea",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 72,
+      "difficulty": 1,
+      "tags": [
+        "food",
+        "a1"
+      ],
+      "unitId": "food",
+      "examples": [
+        {
+          "tr": "Bir çay alabilir miyim?",
+          "en": "Can I get a tea?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_food_kahve",
+      "tr": "kahve",
+      "en": "coffee",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 73,
+      "difficulty": 1,
+      "tags": [
+        "food"
+      ],
+      "unitId": "food",
+      "examples": [
+        {
+          "tr": "Sütlü kahve, lütfen.",
+          "en": "Coffee with milk, please.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_food_ekmek",
+      "tr": "ekmek",
+      "en": "bread",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 74,
+      "difficulty": 1,
+      "tags": [
+        "food"
+      ],
+      "unitId": "food",
+      "examples": [
+        {
+          "tr": "Taze ekmek var mı?",
+          "en": "Is there fresh bread?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_food_yemek",
+      "tr": "yemek",
+      "en": "food / meal",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 75,
+      "difficulty": 1,
+      "tags": [
+        "food"
+      ],
+      "unitId": "food",
+      "examples": [
+        {
+          "tr": "Yemek çok lezzetli.",
+          "en": "The food is very delicious.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_food_kahvalti",
+      "tr": "kahvaltı",
+      "en": "breakfast",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 76,
+      "difficulty": 1,
+      "tags": [
+        "food"
+      ],
+      "unitId": "food",
+      "examples": [
+        {
+          "tr": "Kahvaltı saat kaçta?",
+          "en": "What time is breakfast?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_food_hesap",
+      "tr": "hesap",
+      "en": "the bill",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 77,
+      "difficulty": 1,
+      "tags": [
+        "food",
+        "travel"
+      ],
+      "unitId": "food",
+      "examples": [
+        {
+          "tr": "Hesap, lütfen.",
+          "en": "The bill, please.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_food_menu",
+      "tr": "menü",
+      "en": "menu",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 78,
+      "difficulty": 1,
+      "tags": [
+        "food"
+      ],
+      "unitId": "food",
+      "examples": [
+        {
+          "tr": "Menüyü alabilir miyim?",
+          "en": "Can I have the menu?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_food_istiyorum",
+      "tr": "istiyorum",
+      "en": "I want",
+      "pos": "verb",
+      "type": "word",
+      "freqRank": 79,
+      "difficulty": 1,
+      "tags": [
+        "core",
+        "a1"
+      ],
+      "unitId": "food",
+      "examples": [
+        {
+          "tr": "Su istiyorum.",
+          "en": "I want water.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": "From istemek (to want)."
+    },
+    {
+      "id": "e_food_bir-cay-lutfen",
+      "tr": "bir çay, lütfen",
+      "en": "a tea, please",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 80,
+      "difficulty": 1,
+      "tags": [
+        "food",
+        "a1"
+      ],
+      "unitId": "food",
+      "examples": [
+        {
+          "tr": "Bir çay, lütfen.",
+          "en": "A tea, please.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_food_hesap-lutfen",
+      "tr": "hesap, lütfen",
+      "en": "the bill, please",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 81,
+      "difficulty": 1,
+      "tags": [
+        "food"
+      ],
+      "unitId": "food",
+      "examples": [
+        {
+          "tr": "Hesap, lütfen.",
+          "en": "The bill, please.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_food_afiyet-olsun",
+      "tr": "afiyet olsun",
+      "en": "enjoy your meal",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 82,
+      "difficulty": 1,
+      "tags": [
+        "food"
+      ],
+      "unitId": "food",
+      "examples": [
+        {
+          "tr": "Buyurun, afiyet olsun.",
+          "en": "Here you go, enjoy your meal.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_food_ac",
+      "tr": "aç",
+      "en": "hungry",
+      "pos": "adjective",
+      "type": "word",
+      "freqRank": 83,
+      "difficulty": 1,
+      "tags": [
+        "food"
+      ],
+      "unitId": "food",
+      "examples": [
+        {
+          "tr": "Çok açım.",
+          "en": "I’m very hungry.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_food_susadim",
+      "tr": "susadım",
+      "en": "I’m thirsty",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 84,
+      "difficulty": 1,
+      "tags": [
+        "food"
+      ],
+      "unitId": "food",
+      "examples": [
+        {
+          "tr": "Susadım, su var mı?",
+          "en": "I’m thirsty, is there water?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_food_lezzetli",
+      "tr": "lezzetli",
+      "en": "delicious",
+      "pos": "adjective",
+      "type": "word",
+      "freqRank": 85,
+      "difficulty": 1,
+      "tags": [
+        "food"
+      ],
+      "unitId": "food",
+      "examples": [
+        {
+          "tr": "Çok lezzetli, teşekkürler.",
+          "en": "Very delicious, thank you.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_numbers_bir",
+      "tr": "bir",
+      "en": "one / a",
+      "pos": "numeral",
+      "type": "word",
+      "freqRank": 86,
+      "difficulty": 1,
+      "tags": [
+        "number",
+        "a1"
+      ],
+      "unitId": "numbers",
+      "examples": [
+        {
+          "tr": "Bir kahve, lütfen.",
+          "en": "One coffee, please.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_numbers_iki",
+      "tr": "iki",
+      "en": "two",
+      "pos": "numeral",
+      "type": "word",
+      "freqRank": 87,
+      "difficulty": 1,
+      "tags": [
+        "number"
+      ],
+      "unitId": "numbers",
+      "examples": [
+        {
+          "tr": "İki kişi.",
+          "en": "Two people.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_numbers_uc",
+      "tr": "üç",
+      "en": "three",
+      "pos": "numeral",
+      "type": "word",
+      "freqRank": 88,
+      "difficulty": 1,
+      "tags": [
+        "number"
+      ],
+      "unitId": "numbers",
+      "examples": [
+        {
+          "tr": "Üç gün kaldım.",
+          "en": "I stayed three days.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_numbers_dort",
+      "tr": "dört",
+      "en": "four",
+      "pos": "numeral",
+      "type": "word",
+      "freqRank": 89,
+      "difficulty": 1,
+      "tags": [
+        "number"
+      ],
+      "unitId": "numbers",
+      "examples": [
+        {
+          "tr": "Saat dört.",
+          "en": "It’s four o’clock.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_numbers_bes",
+      "tr": "beş",
+      "en": "five",
+      "pos": "numeral",
+      "type": "word",
+      "freqRank": 90,
+      "difficulty": 1,
+      "tags": [
+        "number"
+      ],
+      "unitId": "numbers",
+      "examples": [
+        {
+          "tr": "Beş dakika.",
+          "en": "Five minutes.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_numbers_alti",
+      "tr": "altı",
+      "en": "six",
+      "pos": "numeral",
+      "type": "word",
+      "freqRank": 91,
+      "difficulty": 1,
+      "tags": [
+        "number"
+      ],
+      "unitId": "numbers",
+      "examples": [
+        {
+          "tr": "Altı kişiyiz.",
+          "en": "We are six people.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_numbers_yedi",
+      "tr": "yedi",
+      "en": "seven",
+      "pos": "numeral",
+      "type": "word",
+      "freqRank": 92,
+      "difficulty": 1,
+      "tags": [
+        "number"
+      ],
+      "unitId": "numbers",
+      "examples": [
+        {
+          "tr": "Yedi gün.",
+          "en": "Seven days.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_numbers_sekiz",
+      "tr": "sekiz",
+      "en": "eight",
+      "pos": "numeral",
+      "type": "word",
+      "freqRank": 93,
+      "difficulty": 1,
+      "tags": [
+        "number"
+      ],
+      "unitId": "numbers",
+      "examples": [
+        {
+          "tr": "Saat sekizde.",
+          "en": "At eight o’clock.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_numbers_dokuz",
+      "tr": "dokuz",
+      "en": "nine",
+      "pos": "numeral",
+      "type": "word",
+      "freqRank": 94,
+      "difficulty": 1,
+      "tags": [
+        "number"
+      ],
+      "unitId": "numbers",
+      "examples": [
+        {
+          "tr": "Dokuz numara.",
+          "en": "Number nine.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_numbers_on",
+      "tr": "on",
+      "en": "ten",
+      "pos": "numeral",
+      "type": "word",
+      "freqRank": 95,
+      "difficulty": 1,
+      "tags": [
+        "number"
+      ],
+      "unitId": "numbers",
+      "examples": [
+        {
+          "tr": "On lira.",
+          "en": "Ten lira.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_numbers_saat",
+      "tr": "saat",
+      "en": "hour / clock",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 96,
+      "difficulty": 1,
+      "tags": [
+        "time"
+      ],
+      "unitId": "numbers",
+      "examples": [
+        {
+          "tr": "Bir saat sonra.",
+          "en": "In one hour.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_numbers_saat-kac",
+      "tr": "saat kaç?",
+      "en": "what time is it?",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 97,
+      "difficulty": 1,
+      "tags": [
+        "time",
+        "a1"
+      ],
+      "unitId": "numbers",
+      "examples": [
+        {
+          "tr": "Affedersiniz, saat kaç?",
+          "en": "Excuse me, what time is it?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_numbers_dakika",
+      "tr": "dakika",
+      "en": "minute",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 98,
+      "difficulty": 1,
+      "tags": [
+        "time"
+      ],
+      "unitId": "numbers",
+      "examples": [
+        {
+          "tr": "Beş dakika bekle.",
+          "en": "Wait five minutes.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_numbers_gun",
+      "tr": "gün",
+      "en": "day",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 99,
+      "difficulty": 1,
+      "tags": [
+        "time"
+      ],
+      "unitId": "numbers",
+      "examples": [
+        {
+          "tr": "Güzel bir gün.",
+          "en": "A beautiful day.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_numbers_hafta",
+      "tr": "hafta",
+      "en": "week",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 100,
+      "difficulty": 1,
+      "tags": [
+        "time"
+      ],
+      "unitId": "numbers",
+      "examples": [
+        {
+          "tr": "Gelecek hafta.",
+          "en": "Next week.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_around_tuvalet",
+      "tr": "tuvalet",
+      "en": "toilet",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 101,
+      "difficulty": 1,
+      "tags": [
+        "travel",
+        "a1"
+      ],
+      "unitId": "around",
+      "examples": [
+        {
+          "tr": "Tuvalet nerede?",
+          "en": "Where is the toilet?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_around_tuvalet-nerede",
+      "tr": "tuvalet nerede?",
+      "en": "where is the toilet?",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 102,
+      "difficulty": 1,
+      "tags": [
+        "travel",
+        "a1"
+      ],
+      "unitId": "around",
+      "examples": [
+        {
+          "tr": "Affedersiniz, tuvalet nerede?",
+          "en": "Excuse me, where is the toilet?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_around_sol",
+      "tr": "sol",
+      "en": "left",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 103,
+      "difficulty": 1,
+      "tags": [
+        "directions"
+      ],
+      "unitId": "around",
+      "examples": [
+        {
+          "tr": "Soldan git.",
+          "en": "Go from the left.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_around_sag",
+      "tr": "sağ",
+      "en": "right",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 104,
+      "difficulty": 1,
+      "tags": [
+        "directions"
+      ],
+      "unitId": "around",
+      "examples": [
+        {
+          "tr": "Sağa dön.",
+          "en": "Turn right.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_around_duz",
+      "tr": "düz",
+      "en": "straight",
+      "pos": "adverb",
+      "type": "word",
+      "freqRank": 105,
+      "difficulty": 1,
+      "tags": [
+        "directions"
+      ],
+      "unitId": "around",
+      "examples": [
+        {
+          "tr": "Düz git.",
+          "en": "Go straight.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_around_yakin",
+      "tr": "yakın",
+      "en": "near",
+      "pos": "adjective",
+      "type": "word",
+      "freqRank": 106,
+      "difficulty": 1,
+      "tags": [
+        "directions"
+      ],
+      "unitId": "around",
+      "examples": [
+        {
+          "tr": "Otel yakın mı?",
+          "en": "Is the hotel near?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_around_uzak",
+      "tr": "uzak",
+      "en": "far",
+      "pos": "adjective",
+      "type": "word",
+      "freqRank": 107,
+      "difficulty": 1,
+      "tags": [
+        "directions"
+      ],
+      "unitId": "around",
+      "examples": [
+        {
+          "tr": "Çok uzak mı?",
+          "en": "Is it very far?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_around_otobus",
+      "tr": "otobüs",
+      "en": "bus",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 108,
+      "difficulty": 1,
+      "tags": [
+        "transport"
+      ],
+      "unitId": "around",
+      "examples": [
+        {
+          "tr": "Otobüs ne zaman gelir?",
+          "en": "When does the bus come?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_around_taksi",
+      "tr": "taksi",
+      "en": "taxi",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 109,
+      "difficulty": 1,
+      "tags": [
+        "transport"
+      ],
+      "unitId": "around",
+      "examples": [
+        {
+          "tr": "Bir taksi lazım.",
+          "en": "I need a taxi.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_around_otel",
+      "tr": "otel",
+      "en": "hotel",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 110,
+      "difficulty": 1,
+      "tags": [
+        "travel"
+      ],
+      "unitId": "around",
+      "examples": [
+        {
+          "tr": "Otelim burada.",
+          "en": "My hotel is here.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_around_bilet",
+      "tr": "bilet",
+      "en": "ticket",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 111,
+      "difficulty": 1,
+      "tags": [
+        "travel"
+      ],
+      "unitId": "around",
+      "examples": [
+        {
+          "tr": "İki bilet, lütfen.",
+          "en": "Two tickets, please.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_around_ne-kadar-tutar",
+      "tr": "ne kadar tutar?",
+      "en": "how much does it cost?",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 112,
+      "difficulty": 1,
+      "tags": [
+        "shopping",
+        "travel"
+      ],
+      "unitId": "around",
+      "examples": [
+        {
+          "tr": "Havaalanına ne kadar tutar?",
+          "en": "How much does it cost to the airport?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_around_kayboldum",
+      "tr": "kayboldum",
+      "en": "I’m lost",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 113,
+      "difficulty": 1,
+      "tags": [
+        "travel"
+      ],
+      "unitId": "around",
+      "examples": [
+        {
+          "tr": "Yardım edin, kayboldum.",
+          "en": "Help, I’m lost.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_feelings_iyi",
+      "tr": "iyi",
+      "en": "good",
+      "pos": "adjective",
+      "type": "word",
+      "freqRank": 114,
+      "difficulty": 1,
+      "tags": [
+        "feelings",
+        "a1"
+      ],
+      "unitId": "feelings",
+      "examples": [
+        {
+          "tr": "Her şey iyi.",
+          "en": "Everything is good.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_feelings_kotu",
+      "tr": "kötü",
+      "en": "bad",
+      "pos": "adjective",
+      "type": "word",
+      "freqRank": 115,
+      "difficulty": 1,
+      "tags": [
+        "feelings"
+      ],
+      "unitId": "feelings",
+      "examples": [
+        {
+          "tr": "Hava çok kötü.",
+          "en": "The weather is very bad.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_feelings_guzel",
+      "tr": "güzel",
+      "en": "beautiful / nice",
+      "pos": "adjective",
+      "type": "word",
+      "freqRank": 116,
+      "difficulty": 1,
+      "tags": [
+        "feelings",
+        "a1"
+      ],
+      "unitId": "feelings",
+      "examples": [
+        {
+          "tr": "Çok güzel bir şehir.",
+          "en": "A very beautiful city.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_feelings_mutlu",
+      "tr": "mutlu",
+      "en": "happy",
+      "pos": "adjective",
+      "type": "word",
+      "freqRank": 117,
+      "difficulty": 1,
+      "tags": [
+        "feelings"
+      ],
+      "unitId": "feelings",
+      "examples": [
+        {
+          "tr": "Çok mutluyum.",
+          "en": "I’m very happy.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_feelings_yorgun",
+      "tr": "yorgun",
+      "en": "tired",
+      "pos": "adjective",
+      "type": "word",
+      "freqRank": 118,
+      "difficulty": 1,
+      "tags": [
+        "feelings"
+      ],
+      "unitId": "feelings",
+      "examples": [
+        {
+          "tr": "Bugün çok yorgunum.",
+          "en": "I’m very tired today.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_feelings_hasta",
+      "tr": "hasta",
+      "en": "sick",
+      "pos": "adjective",
+      "type": "word",
+      "freqRank": 119,
+      "difficulty": 1,
+      "tags": [
+        "feelings"
+      ],
+      "unitId": "feelings",
+      "examples": [
+        {
+          "tr": "Biraz hastayım.",
+          "en": "I’m a little sick.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_feelings_harika",
+      "tr": "harika",
+      "en": "great / wonderful",
+      "pos": "adjective",
+      "type": "word",
+      "freqRank": 120,
+      "difficulty": 1,
+      "tags": [
+        "feelings"
+      ],
+      "unitId": "feelings",
+      "examples": [
+        {
+          "tr": "Harika bir fikir!",
+          "en": "A wonderful idea!",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_feelings_nereli-siniz",
+      "tr": "nerelisiniz?",
+      "en": "where are you from?",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 121,
+      "difficulty": 1,
+      "tags": [
+        "smalltalk",
+        "a1"
+      ],
+      "unitId": "feelings",
+      "examples": [
+        {
+          "tr": "Memnun oldum, nerelisiniz?",
+          "en": "Nice to meet you, where are you from?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_feelings_turkce",
+      "tr": "Türkçe",
+      "en": "Turkish (language)",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 122,
+      "difficulty": 1,
+      "tags": [
+        "learning"
+      ],
+      "unitId": "feelings",
+      "examples": [
+        {
+          "tr": "Türkçe öğreniyorum.",
+          "en": "I’m learning Turkish.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_feelings_ingilizce",
+      "tr": "İngilizce",
+      "en": "English (language)",
+      "pos": "noun",
+      "type": "word",
+      "freqRank": 123,
+      "difficulty": 1,
+      "tags": [
+        "learning"
+      ],
+      "unitId": "feelings",
+      "examples": [
+        {
+          "tr": "İngilizce konuşuyorum.",
+          "en": "I speak English.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_feelings_cok-guzel",
+      "tr": "çok güzel",
+      "en": "very nice",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 124,
+      "difficulty": 1,
+      "tags": [
+        "smalltalk"
+      ],
+      "unitId": "feelings",
+      "examples": [
+        {
+          "tr": "Bu yemek çok güzel.",
+          "en": "This food is very nice.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_feelings_gercekten-mi",
+      "tr": "gerçekten mi?",
+      "en": "really?",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 125,
+      "difficulty": 1,
+      "tags": [
+        "smalltalk"
+      ],
+      "unitId": "feelings",
+      "examples": [
+        {
+          "tr": "Gerçekten mi? İnanmıyorum!",
+          "en": "Really? I don’t believe it!",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_verbs_gitmek",
+      "tr": "gitmek",
+      "en": "to go",
+      "pos": "verb",
+      "type": "word",
+      "freqRank": 126,
+      "difficulty": 1,
+      "tags": [
+        "verb",
+        "a1"
+      ],
+      "unitId": "verbs",
+      "examples": [
+        {
+          "tr": "Eve gitmek istiyorum.",
+          "en": "I want to go home.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_verbs_gelmek",
+      "tr": "gelmek",
+      "en": "to come",
+      "pos": "verb",
+      "type": "word",
+      "freqRank": 127,
+      "difficulty": 1,
+      "tags": [
+        "verb"
+      ],
+      "unitId": "verbs",
+      "examples": [
+        {
+          "tr": "Yarın gel.",
+          "en": "Come tomorrow.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_verbs_icmek",
+      "tr": "içmek",
+      "en": "to drink",
+      "pos": "verb",
+      "type": "word",
+      "freqRank": 128,
+      "difficulty": 1,
+      "tags": [
+        "verb"
+      ],
+      "unitId": "verbs",
+      "examples": [
+        {
+          "tr": "Çay içmek ister misin?",
+          "en": "Do you want to drink tea?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_verbs_yapmak",
+      "tr": "yapmak",
+      "en": "to do / make",
+      "pos": "verb",
+      "type": "word",
+      "freqRank": 129,
+      "difficulty": 1,
+      "tags": [
+        "verb"
+      ],
+      "unitId": "verbs",
+      "examples": [
+        {
+          "tr": "Ne yapıyorsun?",
+          "en": "What are you doing?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_verbs_gormek",
+      "tr": "görmek",
+      "en": "to see",
+      "pos": "verb",
+      "type": "word",
+      "freqRank": 130,
+      "difficulty": 1,
+      "tags": [
+        "verb"
+      ],
+      "unitId": "verbs",
+      "examples": [
+        {
+          "tr": "Seni görmek güzel.",
+          "en": "It’s nice to see you.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_verbs_bilmek",
+      "tr": "bilmek",
+      "en": "to know",
+      "pos": "verb",
+      "type": "word",
+      "freqRank": 131,
+      "difficulty": 1,
+      "tags": [
+        "verb"
+      ],
+      "unitId": "verbs",
+      "examples": [
+        {
+          "tr": "Yolu biliyor musun?",
+          "en": "Do you know the way?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_verbs_konusmak",
+      "tr": "konuşmak",
+      "en": "to speak",
+      "pos": "verb",
+      "type": "word",
+      "freqRank": 132,
+      "difficulty": 1,
+      "tags": [
+        "verb"
+      ],
+      "unitId": "verbs",
+      "examples": [
+        {
+          "tr": "Türkçe konuşmak istiyorum.",
+          "en": "I want to speak Turkish.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_verbs_anlamak",
+      "tr": "anlamak",
+      "en": "to understand",
+      "pos": "verb",
+      "type": "word",
+      "freqRank": 133,
+      "difficulty": 1,
+      "tags": [
+        "verb"
+      ],
+      "unitId": "verbs",
+      "examples": [
+        {
+          "tr": "Anlıyorum.",
+          "en": "I understand.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_verbs_biliyorum",
+      "tr": "biliyorum",
+      "en": "I know",
+      "pos": "verb",
+      "type": "chunk",
+      "freqRank": 134,
+      "difficulty": 1,
+      "tags": [
+        "a1"
+      ],
+      "unitId": "verbs",
+      "examples": [
+        {
+          "tr": "Evet, biliyorum.",
+          "en": "Yes, I know.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_verbs_bilmiyorum",
+      "tr": "bilmiyorum",
+      "en": "I don’t know",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 135,
+      "difficulty": 1,
+      "tags": [
+        "a1"
+      ],
+      "unitId": "verbs",
+      "examples": [
+        {
+          "tr": "Kusura bakma, bilmiyorum.",
+          "en": "Sorry, I don’t know.",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_verbs_var-mi",
+      "tr": "… var mı?",
+      "en": "is there …?",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 136,
+      "difficulty": 1,
+      "tags": [
+        "a1"
+      ],
+      "unitId": "verbs",
+      "examples": [
+        {
+          "tr": "Boş masa var mı?",
+          "en": "Is there a free table?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    },
+    {
+      "id": "e_verbs_yardim-eder-misiniz",
+      "tr": "yardım eder misiniz?",
+      "en": "can you help me?",
+      "pos": "phrase",
+      "type": "chunk",
+      "freqRank": 137,
+      "difficulty": 1,
+      "tags": [
+        "travel"
+      ],
+      "unitId": "verbs",
+      "examples": [
+        {
+          "tr": "Affedersiniz, yardım eder misiniz?",
+          "en": "Excuse me, can you help me?",
+          "audio": null
+        }
+      ],
+      "audio": null,
+      "notes": ""
+    }
+  ]
+}

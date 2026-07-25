@@ -1,111 +1,88 @@
-# Alster Sailing Weather
+# Konuş — learn conversational Turkish
 
-Wind, gusts, rain and sailing conditions for the **Außenalster** in Hamburg —
-plus radar, ten years of history, and an honest answer to "should I trust this
-forecast?"
+A fun, efficient PWA for getting **conversational** in Turkish (for English
+speakers). Built around fast-fluency methodology: high-frequency words first,
+formulaic **phrase chunks**, comprehensible example sentences, and spaced
+repetition — with an AI conversation partner coming in Phase 2.
 
-Built for a dinghy / small keelboat sailor. Free data sources only, no backend,
-no API keys.
+**Phase 1 (this MVP): a full spaced-repetition trainer** — installable, offline,
+no login, all progress stored locally on-device.
 
-## Running it
+## Run it
 
-It's a static site with no build step:
+No build step. Serve the folder and open it:
 
-```bash
-npm run serve     # http://localhost:8000
-npm test          # 23 unit tests, no dependencies
+```sh
+npm run dev          # python3 -m http.server 8000
+# → open http://localhost:8000
 ```
 
-Deploy is `git push` — GitHub Pages serves `main` directly.
+First launch: pick your level, goal, and daily pace, then start reviewing.
+Cards show the English meaning (try to *say* it in Turkish), then reveal the
+Turkish with audio and an example. Rate **Again / Hard / Good / Easy**.
 
-## How it works
+## Develop
 
-| Piece | Source | Notes |
-|---|---|---|
-| Current + hourly + 3-day forecast | Open-Meteo | Keyless, CORS-open, fetched in the browser |
-| Forecast accuracy | Open-Meteo Previous-Runs | Truth + 1/2/3-day-ahead forecasts in one call |
-| Ten-year climatology | Open-Meteo ERA5 archive | Precomputed into `data/climatology.json` |
-| Rain radar | RainViewer | Animated, keyless |
-| Station cross-check | Bright Sky / DWD | Hamburg-Fuhlsbüttel, ~7 km |
-| Map tiles | CARTO / OpenStreetMap | Follows the light/dark substrate |
-
-### Two things worth knowing
-
-**Don't pin `models=icon_d2`.** ICON-D2 is the high-resolution German model but
-only runs ~48h. Pinning it returns `null` for day 3 and for
-`precipitation_probability` at *every* hour. The default `best_match` already
-selects ICON-D2 for the near term and falls back beyond it. `fetchForecast()`
-asserts against this specific failure so a silent model swap surfaces loudly.
-
-**Forecast accuracy needs no infrastructure.** The Previous-Runs API returns the
-analysis and what the forecast said 1/2/3 days earlier, already aligned on the
-same timestamps. So there is no cron job, no database, and no waiting weeks for
-data to accumulate — it works on first load. The trade-off, stated on the page:
-"truth" there is the model's own later analysis, not a measurement.
-
-**No waves.** The Außenalster is ~1.6 km². No wave model covers it and none
-would mean anything. Instead `js/chop.js` derives a qualitative surface state
-from wind speed and the fetch available in that direction — the lake is ~1.6 km
-N–S but only ~1.2 km E–W, so a northerly builds noticeably more chop than an
-easterly at the same speed. It deliberately never prints a wave height in metres.
-
-## The hourly score
-
-Every hour gets a 0–100 sailing score (`js/score.js`), shown as a colour-coded
-strip per day and as a ring for the current hour. It starts from a wind curve
-that plateaus at 100 across 8–16 kn, then deducts for gustiness, rain, cold and
-fog; thunderstorms hard-cap it at 5. Nothing is a tuned black box — each hour
-carries a `reasons` array that the UI surfaces, so any reading can be explained.
-
-Each day also names its **best 3-hour window**. That length is deliberate: a
-"longest run above a threshold" is useless here, because on a typical Alster day
-almost every hour clears the bar and it reports "best 06–22h", which is not
-advice. The window also requires every hour to clear a floor, not just the
-average — otherwise 90 / 10 / 90 averages to a recommendation.
-
-The four score bands reuse the site's status colours, so green means the same
-thing here as on the verdict badge. Colour is never the only channel: every cell
-prints its number, every row states its window in words, and the legend labels
-each band.
-
-## Design
-
-The page is **conditions-reactive**: the current sailing verdict selects a
-pastel traffic-light background — green for good, yellow for caution or calm,
-and red for serious or critical conditions. Weather and sun position still
-provide the initial loading theme before live conditions arrive.
-
-Charts do *not* ride that shifting background — they sit on one of exactly two
-card surfaces (light `#fcfcfb` / dark `#1a1a19`), because the series palette is
-validated against those two and nothing else. The wind/gust pair measures CVD
-ΔE 24.7 (light) and 26.8 (dark), well clear of the ≥8 target.
-
-Wind and rain share an x-axis but never a y-axis — they're stacked panels with
-one crosshair, not a dual-axis chart.
-
-Force a theme for testing with `?theme=storm` (any of the six states).
-
-## Layout
-
-```
-index.html
-css/       theme.css (reactive states) · layout.css · charts.css
-js/
-  api.js      all remote data access + caching
-  verdict.js  wind → sailing verdict, gust-factor and thunder overrides
-  chop.js     fetch geometry → qualitative surface state
-  theme.js    conditions → theme state
-  charts/     timeline · windRose · accuracy  (hand-rolled SVG)
-  map/        base · radar · wind
-data/climatology.json         committed; 87,672 hours, 2016–2025
-scripts/build-climatology.mjs
-.github/workflows/climatology.yml   monthly refresh
+```sh
+npm test             # node --test — pure logic: scheduler, queue, deck, day, reactive
+npm run typecheck    # tsc --noEmit over // @ts-check JSDoc (needs: npm install)
+npm run build:deck   # regenerate data/deck.json from content/deck.source.mjs
 ```
 
-## Data & licensing
+## How it's built (buildless by design)
 
-Non-commercial use of free tiers throughout. Open-Meteo (CC BY 4.0), DWD via
-Bright Sky, RainViewer, CARTO tiles, OpenStreetMap data. Attribution is in the
-page footer.
+Vanilla ES modules, no bundler — served straight from `main:/` to preserve the
+existing GitHub Pages deploy. A ~60-line reactive helper drives the UI; logic
+lives in pure, unit-tested modules.
 
-This is a planning aid, not a safety service.
+```
+js/srs/scheduler.mjs   SM-2 + learning-steps scheduler (pure)
+js/srs/queue.mjs       builds today's study queue (pure)
+js/deck/{schema,loader} deck contract + fetch/validate/reconcile
+js/store/{db,settings}  IndexedDB (cards, reviews, chats) + localStorage
+js/lib/{reactive,day}   signals/effects + streak date-math
+js/audio/tts.mjs       Turkish SpeechSynthesis (feature-detected)
+js/views/*             onboarding, dashboard, review, settings
+content/deck.source.mjs curated deck source → scripts/build-deck.mjs → data/deck.json
+```
+
+Content and progress are separate: the deck ships as immutable JSON keyed by
+stable entry ids, so deck updates never disturb a learner's SRS state. **Never
+reuse an entry id** — add new entries at the end of a unit.
+
+## AI conversation (Phase 2) — voice-first
+
+Add your Anthropic API key in **Settings → AI conversation** (stored on-device,
+sent only to `api.anthropic.com`), then tap **Practice speaking** and pick a
+scenario. It's a **hands-free voice loop**: the tutor greets you out loud → the
+mic opens → you speak Turkish → the tutor replies in short Turkish and speaks it
+→ the mic reopens. Replies stay within words you've started learning, with a
+collapsible correction only when you make a real mistake. Tap any word for a
+gloss, **Translate** a whole reply, and see a rough per-session cost in the
+header. The 🎙️/⌨️ header button switches between voice and typing.
+
+Voice **input** uses the browser's speech recognition — **Chrome or Edge**, with
+microphone permission (it's cloud-based, not offline). Voice **output** uses an
+on-device Turkish (`tr-TR`) voice. Where either is missing, it falls back to
+typing / on-screen text automatically. Modules: `js/audio/asr.mjs` (recognition),
+`js/audio/tts.mjs` (speech).
+
+All API calls go through `js/ai/client.mjs` behind a configurable `baseUrl`, so
+swapping browser-direct for a serverless proxy (for a public launch) is a
+one-line change. Models: `claude-sonnet-5` for conversation, `claude-haiku-4-5`
+for translate/gloss.
+
+```
+js/ai/sse.mjs       pure SSE frame parser (tested against fixtures)
+js/ai/client.mjs    streaming + non-streaming Anthropic client (baseUrl seam)
+js/ai/prompts.mjs   tutor system prompt + correction protocol (pure)
+js/ai/vocab.mjs     known-word list from SRS state (pure)
+js/ai/helpers.mjs   translate / gloss / test-key + request bodies
+js/ai/pricing.mjs   per-session cost estimate
+js/views/chat.mjs   streaming chat UI
+```
+
+## Roadmap (Phase 3)
+
+More content toward ~1000 words, pre-recorded audio, extra drills,
+speech-recognition practice, and JSON export/import backup.
