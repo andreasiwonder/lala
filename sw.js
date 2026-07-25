@@ -2,7 +2,7 @@
    network-first (so new code loads when online, cache when offline). The
    Anthropic API (Phase 2) is always bypassed — never cached. */
 
-const CACHE = 'konus-v6';
+const CACHE = 'konus-v7';
 
 const ASSETS = [
   './',
@@ -16,6 +16,7 @@ const ASSETS = [
   'data/deck.json',
   'js/main.mjs',
   'js/app.mjs',
+  'js/version.mjs',
   'js/lib/reactive.mjs',
   'js/lib/day.mjs',
   'js/lib/filmstrip.mjs',
@@ -64,8 +65,11 @@ self.addEventListener('fetch', (event) => {
   // go straight to the network, untouched and uncached.
   if (request.method !== 'GET' || url.origin !== self.location.origin) return;
 
+  // Network-first, but bypass the HTTP cache (`no-store`) so a fresh deploy is
+  // never masked by GitHub Pages' max-age. The Cache Storage copy is only an
+  // offline fallback. This is what keeps updates from getting "stuck".
   event.respondWith(
-    fetch(request)
+    fetch(new Request(request, { cache: 'no-store' }))
       .then((response) => {
         const copy = response.clone();
         caches.open(CACHE).then((cache) => cache.put(request, copy));

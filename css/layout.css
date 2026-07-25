@@ -114,6 +114,11 @@
 .status {
   font-size: 0.85rem;
 }
+.build-tag {
+  text-align: center;
+  font-size: 0.75rem;
+  padding: 4px;
+}
 .status.ok {
   color: var(--good);
 }

@@ -11,6 +11,9 @@ import { LearnView } from './views/learn.mjs';
 import { ReviewView } from './views/review.mjs';
 import { SettingsView } from './views/settings.mjs';
 import { ChatView } from './views/chat.mjs';
+import { APP_VERSION, BUILD } from './version.mjs';
+
+console.log(`Konuş v${APP_VERSION} · build ${BUILD}`);
 
 const appRoot = /** @type {HTMLElement} */ (document.getElementById('app'));
 

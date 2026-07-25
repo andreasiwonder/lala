@@ -10,6 +10,7 @@ import { el, render, signal, effect } from '../lib/reactive.mjs';
 import { update } from '../store/settings.mjs';
 import { turkishVoices, hasTurkishVoice } from '../audio/tts.mjs';
 import { testKey } from '../ai/helpers.mjs';
+import { APP_VERSION, BUILD } from '../version.mjs';
 
 /**
  * @param {AppContext} ctx
@@ -63,6 +64,7 @@ export function SettingsView(ctx) {
         : el('p.muted', null, 'No Turkish (tr-TR) voice found on this device — audio is hidden. On desktop Chrome you may need to install a Turkish voice.'),
     ),
     aiSection(ctx, set, s),
+    el('p.build-tag.muted', null, `Konuş v${APP_VERSION} · build ${BUILD}`),
   );
 
   return root;
@@ -101,6 +103,14 @@ function aiSection(ctx, set, s) {
       st.state === 'testing' ? 'Testing…' : st.state === 'idle' ? '' : st.message ?? '';
   });
 
+  const keyPresent = signal(Boolean(s.apiKey));
+  const savedLine = el('span.status');
+  effect(() => {
+    const on = keyPresent();
+    savedLine.className = `status ${on ? 'ok' : ''}`;
+    savedLine.textContent = on ? 'Key saved on this device ✓' : 'No key saved yet';
+  });
+
   return el(
     'div.card.stack',
     null,
@@ -108,8 +118,10 @@ function aiSection(ctx, set, s) {
     el('p.muted', null, 'Chat with a patient Turkish tutor that sticks to the words you know. Your Anthropic API key stays on this device and is sent only to api.anthropic.com.'),
     apiKeyField(s.apiKey, (v) => {
       set({ apiKey: v });
+      keyPresent.set(Boolean(v));
       status.set({ state: 'idle' });
     }),
+    savedLine,
     el('div.row', null, el('button.secondary', { onclick: runTest }, 'Test key'), statusLine),
     choice(
       'Conversation model',

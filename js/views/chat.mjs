@@ -101,8 +101,16 @@ export function ChatView(ctx) {
       onError: (err) => {
         interim.set('');
         if (phase.peek() === 'listening') phase.set('idle');
-        if (err === 'not-allowed' || err === 'service-not-allowed') {
-          glossPop.set({ word: 'Microphone', text: 'blocked — allow mic access to talk.', loading: false });
+        /** @type {Record<string, string>} */
+        const messages = {
+          'no-speech': 'Didn’t catch that — tap the mic and speak again.',
+          'audio-capture': 'No microphone found on this device.',
+          'not-allowed': 'Microphone blocked — allow mic access in your browser.',
+          'service-not-allowed': 'Microphone blocked — allow mic access in your browser.',
+          network: 'Speech service unreachable — check your connection.',
+        };
+        if (err !== 'aborted') {
+          glossPop.set({ word: 'Mic', text: messages[err] ?? `Recognition error: ${err}`, loading: false });
         }
       },
     });
@@ -114,6 +122,7 @@ export function ChatView(ctx) {
     const rec = ensureRecognizer();
     if (!rec) return;
     interim.set('');
+    glossPop.set(null); // clear any previous mic notice
     phase.set('listening');
     rec.start();
   }
